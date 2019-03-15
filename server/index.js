@@ -3,10 +3,18 @@
 const express = require('express');
 const cors = require('cors');
 const morgan = require('morgan');
+const mongoose = require('mongoose');
+const passport = require('passport');
+const localStrategy = require('./passport/local');
+const jwtStrategy = require('./passport/jwt');
 
 const { PORT, CLIENT_ORIGIN } = require('./config');
 const { dbConnect } = require('./db-mongoose');
 // const {dbConnect} = require('./db-knex');
+
+// Routers
+const usersRouter = require('./routes/users');
+const authRouter = require('./routes/auth');
 
 const app = express();
 
@@ -21,6 +29,34 @@ app.use(
     origin: CLIENT_ORIGIN
   })
 );
+
+// Parse request body
+app.use(express.json());
+
+// Configure passport to utilize strategies
+passport.use(localStrategy);
+passport.use(jwtStrategy);
+
+// Mount routers
+app.use('/api/users', usersRouter);
+app.use('/api', authRouter);
+
+// Catch-all 404
+app.use(function (req, res, next) {
+  const err = new Error('Not Found');
+  err.status = 404;
+  next(err);
+});
+
+// Custom Error Handler
+app.use((err, req, res, next) => {
+  if (err.status) {
+    const errBody = Object.assign({}, err, { message: err.message });
+    res.status(err.status).json(errBody);
+  } else {
+    res.status(500).json({ message: 'Internal Server Error' });
+  }
+});
 
 function runServer(port = PORT) {
   const server = app
