@@ -15,9 +15,9 @@ const User = require('../models/user');
 
 /* ========== POST USERS ========== */
 router.post('/', (req, res, next) => {
-  const {fullname, username, password} = req.body;
+  const {firstName, lastName, username, password} = req.body;
   
-  const requiredFields = ['username', 'password'];
+  const requiredFields = ['firstName', 'lastName', 'username', 'password'];
   const missingField = requiredFields.find(field => !(field in req.body));
 
   if (missingField) {
@@ -26,7 +26,7 @@ router.post('/', (req, res, next) => {
     return next(err);
   }
 
-  const stringFields = ['username', 'password', 'fullname'];
+  const stringFields = ['username', 'password', 'firstName', 'lastName'];
   const nonStringField = stringFields.find(field => {
     return field in req.body && typeof req.body[field] !== 'string';
   });
@@ -37,7 +37,7 @@ router.post('/', (req, res, next) => {
     return next(err);
   }
 
-  const explicitlyTrimmedFields = ['username', 'password'];
+  const explicitlyTrimmedFields = ['username', 'password', 'firstName', 'lastName'];
   const nonTrimmedField = explicitlyTrimmedFields.find(field => {
     return req.body[field].trim() !== req.body[field];
   });
@@ -84,11 +84,13 @@ router.post('/', (req, res, next) => {
   User
     .hashPassword(password)
     .then(digest => {
-      const trimmedFullname = fullname.trim();
+      const trimmedFirstName = firstName.trim();
+      const trimmedLastName = lastName.trim();
       const newUser = {
         username,
         password: digest,
-        fullname: trimmedFullname
+        firstName: trimmedFirstName,
+        lastName: trimmedLastName
       };
       return User.create(newUser);
     })
