@@ -1,0 +1,31 @@
+{
+  "name": "thinkful-backend-template",
+  "version": "1.0.0",
+  "description": "Template for an Express backend",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon index.js",
+    "mocha": "mocha --exit --file test/setup.test.js '!(node_modules)/**/*test.js'",
+    "mocha-exit0": "mocha --exit --file test/setup.test.js '!(node_modules)/**/*test.js' || true",
+    "test": "nodemon --exec npm run mocha-exit0",
+    "cover": "nodemon --exec nyc --reporter=lcov --reporter=text-summary npm run mocha-exit0",
+    "heroku": "node index.js",
+    "travis": "npm run mocha"
+  },
+  "author": "Joe Turner <jturner@thinkful.com>",
+  "license": "MIT",
+  "dependencies": {
+    "cors": "^2.8.4",
+    "express": "^4.16.3",
+    "knex": "^0.15.2",
+    "mongoose": "^5.2.6",
+    "morgan": "^1.9.0",
+    "pg": "^7.4.3"
+  },
+  "devDependencies": {
+    "chai": "^4.1.2",
+    "chai-http": "^4.0.0",
+    "mocha": "^5.2.0",
+    "nyc": "^12.0.2"
+  }
+}
