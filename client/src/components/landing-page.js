@@ -11,17 +11,18 @@ export function LandingPage(props) {
   }
 
   return (
-    <div className="home">
-      <h1>Learn Spanish</h1>
-      <h2>As easy as uno, dos tres!</h2>
-      <button
-        className="bg-orange hover:bg-orange-dark text-white font-bold py-2 px-4 rounded"
-        type="button"
-      >
-        Start Learning!
-      </button>
+    <div className="home mt-32 container mx-auto">
+      <div className="flex flex-col justify-center align-center items-center">
+        <p className="text-5xl mb-2">Learn Spanish</p>
+        <p className="text-3xl mb-6">As easy as uno, dos tres!</p>
+        <button
+          className="bg-orange hover:bg-orange-dark text-white font-bold py-2 px-4 rounded"
+          type="button"
+        >
+          Start Learning!
+        </button>
+      </div>
       <LoginForm />
-      <Link to="/register">Register</Link>
     </div>
   );
 }
