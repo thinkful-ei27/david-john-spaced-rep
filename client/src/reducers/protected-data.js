@@ -4,7 +4,7 @@ import {
 } from '../actions/protected-data';
 
 const initialState = {
-    data: '',
+    data: "",
     error: null
 };
 
