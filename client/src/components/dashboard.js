@@ -50,12 +50,12 @@ export class Dashboard extends React.Component {
             Skip
           </button>
           <button
-            onClick={() => this.handleUserSubmitAnswer()}
             type="button"
             className="bg-orange hover:bg-orange-dark text-white font-bold py-2 px-4 rounded"
             onClick={() => {
               console.log(`index is: ${  this.props.wordsIndex}`)
               this.moveRight(this.props.wordsIndex);
+              this.handleUserSubmitAnswer();
             }}
           >
             Submit
