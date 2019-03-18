@@ -33,7 +33,7 @@ export const submitAnswerError = error => ({
   error
 });
 
-export const submitAnswer = val => dispatch => {
+export const submitAnswer = (val, word) => dispatch => {
   dispatch(submitAnswerRequest());
   const config = {
     method: "post",
@@ -43,7 +43,7 @@ export const submitAnswer = val => dispatch => {
       Authorization: `Bearer ${localStorage.authToken}`
     },
     data: {
-      word: "hola",
+      word,
       answer: val
     }
   };

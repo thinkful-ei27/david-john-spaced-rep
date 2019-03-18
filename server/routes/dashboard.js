@@ -6,7 +6,13 @@ const mongoose = require('mongoose');
 const router = express.Router();
 
 const testAnswers = [
-  {word: 'hola', answer: 'hello'}
+  {word: '¡Hola!', answer: 'hello'},
+  {word: 'buenos días', answer: 'good morning'},
+  {word: 'Buenas tardes', answer: 'good afternoon'},
+  {word: 'Buenas noches', answer: 'goodnight'},
+  {word: 'Me llamo', answer: 'my name is'},
+  {word: 'Gracias', answer: 'thank you'},
+  {word: 'De nada', answer: 'you are welcome'},
 ];
 
 const passport = require('passport');

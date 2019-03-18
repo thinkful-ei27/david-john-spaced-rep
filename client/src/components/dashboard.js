@@ -21,7 +21,9 @@ export class Dashboard extends React.Component {
   }
 
   handleUserSubmitAnswer() {
-    this.props.dispatch(submitAnswer(this.props.answer));
+    this.props.dispatch(
+      submitAnswer(this.props.answer, this.props.words[this.props.wordsIndex])
+    );
   }
 
   render() {
