@@ -3,11 +3,13 @@ import { API_BASE_URL } from "../config";
 
 export const UPDATE_WORD_SUCCESS = "UPDATE_WORD_SUCCESS";
 export const UPDATE_WORD_START = "UPDATE_WORD_START";
-export const NEW_WORD_ERROR = "NEW_WORD_ERROR"
+export const NEW_WORD_ERROR = "NEW_WORD_ERROR";
 export const SET_ANSWER = "SET_ANSWER";
 export const SUBMIT_ANSWER_REQUEST = "SUBMIT_ANSWER_REQUEST";
 export const SUBMIT_ANSWER_SUCCESS = "SUBMIT_ANSWER_SUCCESS";
 export const SUBMIT_ANSWER_ERROR = "SUBMIT_ANSWER_ERROR";
+export const SET_PROGRESS_REQUEST = "SET_PROGRESS_REQUEST";
+export const SET_PROGRESS_SUCCESS = "SET_PROGRESS_SUCCESS";
 
 export const updateWordSuccess = word => {
   return {
@@ -45,25 +47,48 @@ export const submitAnswerError = error => ({
 export const newWordError = error => ({
   type: NEW_WORD_ERROR,
   error
-})
+});
+
+export const setProgressRequest = () => ({
+  type: SET_PROGRESS_REQUEST
+});
+
+export const setProgressSuccess = progress => ({
+  type: SET_PROGRESS_SUCCESS,
+  progress
+});
 
 export const getNewWord = () => (dispatch, getState) => {
   // const authToken = getState().auth.authToken;
-  dispatch(updateWordStart())
+  dispatch(updateWordStart());
   const config = {
-    method: 'GET',
-    url: `${API_BASE_URL}/words`, 
-  }
+    method: "GET",
+    url: `${API_BASE_URL}/words`
+  };
   return axios(config)
-      .then(({data}) => {
-        console.log(data.word.word)
-         dispatch(updateWordSuccess(data.word.word))
-      })
-      .catch(err => {
-          dispatch(newWordError(err));
-      });
+    .then(({ data }) => {
+      const { word } = data.word;
+      // console.log(data.word.word);
+      dispatch(updateWordSuccess(word));
+      return word;
+    })
+    .then(async word => {
+      dispatch(setProgressRequest());
+      const config2 = {
+        method: "get",
+        url: `${API_BASE_URL}/history/progress?word=${word}`,
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.authToken}`
+        }
+      };
+      const { data } = await axios(config2);
+      return dispatch(setProgressSuccess(data));
+    })
+    .catch(err => {
+      dispatch(newWordError(err));
+    });
 };
-
 
 export const submitAnswer = (val, word) => dispatch => {
   dispatch(submitAnswerRequest());
@@ -85,8 +110,9 @@ export const submitAnswer = (val, word) => dispatch => {
       console.log(data.response);
       return dispatch(submitAnswerSuccess(data.response));
     })
-    .then( () => {
-      return getNewWord()
+    .then(() => {
+      console.log("we made it to get new word");
+      return dispatch(getNewWord());
     })
     .catch(err => {
       const message = "this is an error message";
