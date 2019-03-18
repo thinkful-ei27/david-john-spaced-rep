@@ -19,8 +19,22 @@ export class Dashboard extends React.Component {
             type="text"
             placeholder="Type english answer here"
             callback={val => console.log(val)}
-            className="mt-8 max-w-md shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker leading-tight focus:outline-none focus:shadow-outline"
+            className="mt-8 max-w-sm shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker leading-tight focus:outline-none focus:shadow-outline"
           />
+        </div>
+        <div className="flex flex-row justify-around mt-4">
+          <button
+            type="button"
+            className="text-grey-darkest font-bold py-2 px-4 rounded"
+          >
+            Skip
+          </button>
+          <button
+            type="button"
+            className="bg-orange hover:bg-orange-dark text-white font-bold py-2 px-4 rounded"
+          >
+            Submit
+          </button>
         </div>
       </div>
     );

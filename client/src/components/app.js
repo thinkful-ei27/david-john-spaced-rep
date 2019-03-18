@@ -8,6 +8,7 @@ import Dashboard from "./dashboard";
 import RegistrationPage from "./registration-page";
 import { refreshAuthToken } from "../actions/auth";
 import Header from "./Header";
+import Account from "./Account";
 
 export class App extends React.Component {
   componentDidUpdate(prevProps) {
@@ -45,6 +46,7 @@ export class App extends React.Component {
         <Header />
         <Route exact path="/" component={LandingPage} />
         <Route exact path="/dashboard" component={Dashboard} />
+        <Route exact path="/account" component={Account} />
         <Route exact path="/register" component={RegistrationPage} />
       </div>
     );
