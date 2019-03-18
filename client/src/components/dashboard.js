@@ -2,19 +2,17 @@ import React from "react";
 import { connect } from "react-redux";
 import requiresLogin from "./requires-login";
 import { fetchProtectedData } from "../actions/protected-data";
-import { moveWordIndexRight } from "../actions/dashboard";
+import { getNewWord } from "../actions/dashboard";
 import AnswerInput from "./AnswerInput";
 import { submitAnswer, setAnswer } from "../actions/dashboard";
 
 export class Dashboard extends React.Component {
   componentDidMount() {
-    this.props.dispatch(fetchProtectedData());
+    this.props.dispatch(getNewWord());
   }
 
-  moveRight(index) {
-    console.log("right fired! with index");
-    console.log(this.props.words[this.props.wordsIndex].word + "'s correct: " + this.props.words[this.props.wordsIndex].correct + "\n incorrect: " + this.props.words[this.props.wordsIndex].incorrect)
-    this.props.dispatch(moveWordIndexRight(index));
+  newWord() {
+    this.props.dispatch(getNewWord());
   }
 
   handleUpdateAnswer(val) {
@@ -35,7 +33,7 @@ export class Dashboard extends React.Component {
           <p className="mt-2">Shall we continue learning?</p>
           <p className="text-xl mt-8">Type the right answer</p>
           <p className="text-5xl mt-8">
-            {this.props.words[this.props.wordsIndex].word}
+            {this.props.word}
           </p>
           <AnswerInput
             type="text"
@@ -48,7 +46,7 @@ export class Dashboard extends React.Component {
           <button
             type="button"
             className="text-grey-darkest font-bold py-2 px-4 rounded"
-            onClick={() => this.moveRight(this.props.wordsIndex)}
+            onClick={() => this.newWord()}
           >
             Skip
           </button>
@@ -57,7 +55,6 @@ export class Dashboard extends React.Component {
             className="bg-orange hover:bg-orange-dark text-white font-bold py-2 px-4 rounded"
             onClick={() => {
               console.log(`index is: ${this.props.wordsIndex}`)
-              this.moveRight(this.props.wordsIndex);
               this.handleUserSubmitAnswer();
             }}
           >
@@ -76,7 +73,7 @@ const mapStateToProps = state => {
     username: state.auth.currentUser.username,
     name: `${currentUser.firstName} ${currentUser.lastName}`,
     protectedData: state.protectedData.data,
-    words: state.dashBoard.words,
+    word: state.dashBoard.word,
     wordsIndex: state.dashBoard.wordsIndex,
     answer: state.dashBoard.answer,
     feedback: state.dashBoard.feedback

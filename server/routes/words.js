@@ -11,11 +11,17 @@ const router = express.Router();
 //
 // const passport = require('passport');
 // router.use('/', passport.authenticate('jwt', {session: false, failWithError: true}));
+let index = -1;
 router.get('/', (req, res, next) => {
+  if (index > 5) {
+    index = 0;
+  } else {
+    index = index + 1
+  }
   return Word.find()
     .then( (_res) =>
     res.json({
-      word: _res[1]
+      word: _res[index]
     }));
 });
 
