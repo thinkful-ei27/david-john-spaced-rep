@@ -9,6 +9,10 @@ export class Dashboard extends React.Component {
     this.props.dispatch(fetchProtectedData());
   }
 
+  handleUserSubmitAnswer(val) {
+    console.log(val);
+  }
+
   render() {
     return (
       <div className="dashboard container mx-auto mt-32">
@@ -20,7 +24,7 @@ export class Dashboard extends React.Component {
           <AnswerInput
             type="text"
             placeholder="Type english answer here"
-            callback={val => console.log(val)}
+            callback={val => this.handleUserSubmitAnswer(val)}
             className="mt-8 max-w-sm shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker leading-tight focus:outline-none focus:shadow-outline"
           />
         </div>
