@@ -18,20 +18,20 @@ router.post('/feedback', (req, res, next) => {
   const wordPair = testAnswers.find(wordPair => wordPair.word === word);
 
   if (wordPair.answer === answer) {
-    res.json({
+    return res.json({
       response: 'Nice job!',
       yourAnswer: `${answer}`,
       correctAnswer: `${wordPair.answer}`
     });
-  } else {
-    res.json({
+  } else if (wordPair.answer !== answer) {
+    return res.json({
       response: `Incorrect. The correct answer is: ${wordPair.answer}`,
       yourAnswer: `${answer}`,
       correctAnswer: `${wordPair.answer}`
     });
+  } else {
+    return next();
   }
-
-  next();
 });
 
 module.exports = router;
