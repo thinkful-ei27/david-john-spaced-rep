@@ -5,7 +5,11 @@ const mongoose = require('mongoose');
 const { DATABASE_URL } = require('../config');
 
 const User = require('../models/user');
-const { users } = require('../db/data');
+const History = require('../models/history');
+
+const { users, history } = require('../db/data');
+
+console.log(history);
 
 console.log(`Connecting to mongodb at ${DATABASE_URL}`);
 mongoose.connect(DATABASE_URL, { useNewUrlParser: true, useCreateIndex : true })
@@ -17,12 +21,14 @@ mongoose.connect(DATABASE_URL, { useNewUrlParser: true, useCreateIndex : true })
     console.info('Creating Indexes');
     return Promise.all([
       User.ensureIndexes(),
+      History.ensureIndexes(),
     ]);
   })
   .then(() => {
     console.info('Seeding Database...');
     return Promise.all([
       User.insertMany(users),
+      History.insertMany(history),
     ]);
   })
   .then(results => {
