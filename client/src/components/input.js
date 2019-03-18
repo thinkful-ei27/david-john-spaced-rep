@@ -20,7 +20,7 @@ export default class Input extends React.Component {
 
     return (
       <div className="form-input">
-        <label htmlFor={this.props.input.name}>
+        <label className="font-bold" htmlFor={this.props.input.name}>
           {this.props.label}
           {error}
           {warning}
@@ -30,6 +30,7 @@ export default class Input extends React.Component {
           id={this.props.input.name}
           type={this.props.type}
           ref={input => (this.input = input)}
+          className="shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker leading-tight"
         />
       </div>
     );

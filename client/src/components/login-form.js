@@ -20,7 +20,7 @@ export class LoginForm extends React.Component {
     }
     return (
       <form
-        className="login-form"
+        className="login-form max-w-sm"
         onSubmit={this.props.handleSubmit(values => this.onSubmit(values))}
       >
         {error}
@@ -40,7 +40,10 @@ export class LoginForm extends React.Component {
           id="password"
           validate={[required, nonEmpty]}
         />
-        <button disabled={this.props.pristine || this.props.submitting}>
+        <button
+          className="bg-orange hover:bg-orange-dark text-white font-bold py-2 px-4 rounded mt-4"
+          disabled={this.props.pristine || this.props.submitting}
+        >
           Log in
         </button>
       </form>

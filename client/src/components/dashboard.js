@@ -13,7 +13,9 @@ export class Dashboard extends React.Component {
     return (
       <div className="dashboard container mx-auto mt-32">
         <div className="answer-box bg-white rounded flex flex-col justify-center items-center">
-          <p className="text-xl">Type the right answer</p>
+          <p className="text-lg">Welcome back, {this.props.name}!</p>
+          <p className="mt-2">Shall we continue learning?</p>
+          <p className="text-xl mt-8">Type the right answer</p>
           <p className="text-5xl mt-8">¡Hola!</p>
           <AnswerInput
             type="text"

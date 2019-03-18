@@ -22,7 +22,7 @@ export class RegistrationForm extends React.Component {
   render() {
     return (
       <form
-        className="login-form"
+        className="login-form max-w-sm"
         onSubmit={this.props.handleSubmit(values => this.onSubmit(values))}
       >
         <label htmlFor="firstName">First name</label>
@@ -51,6 +51,7 @@ export class RegistrationForm extends React.Component {
           validate={[required, nonEmpty, matchesPassword]}
         />
         <button
+          className="bg-orange hover:bg-orange-dark text-white font-bold py-2 px-4 rounded mt-4"
           type="submit"
           disabled={this.props.pristine || this.props.submitting}
         >
