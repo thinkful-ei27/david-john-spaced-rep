@@ -24,6 +24,16 @@ const users = [
   }
 ];
 
+const words = [
+  {"word" : "¡Hola!"},
+  {"word" : "buenos días"},
+  {"word" : "Buenas tardes"},
+  {"word" : "Buenas noches"},
+  {"word" : "Me llamo"},
+  {"word" : "Gracias"},
+  {"word" : "De nada"},
+]
+
 module.exports = {
-  users,
+  users, words
 };

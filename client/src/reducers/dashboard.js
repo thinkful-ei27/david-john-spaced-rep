@@ -8,13 +8,13 @@ import {
 
 const initialState = {
   words: [
-    "¡Hola!",
-    "buenos días",
-    "Buenas tardes",
-    "Buenas noches",
-    "Me llamo",
-    "Gracias",
-    "De nada"
+    {word: "¡Hola!", correct: 0, incorrect: 0},
+    {word:"buenos días", correct: 0, incorrect: 0},
+    {word:"Buenas tardes", correct: 0, incorrect: 0},
+    {word:"Buenas noches", correct: 0, incorrect: 0},
+    {word:"Me llamo", correct: 0, incorrect: 0},
+    {word:"Gracias", correct: 0, incorrect: 0},
+    {word:"De nada", correct: 0, incorrect: 0}
   ],
   wordsIndex: 0,
   answer: null,

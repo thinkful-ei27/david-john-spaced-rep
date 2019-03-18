@@ -8,6 +8,8 @@ const passport = require('passport');
 const localStrategy = require('./passport/local');
 const jwtStrategy = require('./passport/jwt');
 
+const wordArr = [{},{}]
+
 const { PORT, CLIENT_ORIGIN } = require('./config');
 const { dbConnect } = require('./db-mongoose');
 // const {dbConnect} = require('./db-knex');
@@ -16,6 +18,7 @@ const { dbConnect } = require('./db-mongoose');
 const usersRouter = require('./routes/users');
 const authRouter = require('./routes/auth');
 const dashboardRouter = require('./routes/dashboard');
+const wordsRouter = require('./routes/words')
 
 const app = express();
 
@@ -41,7 +44,9 @@ passport.use(jwtStrategy);
 // Mount routers
 app.use('/api/users', usersRouter);
 app.use('/api/dashboard', dashboardRouter);
+app.use('/api/words', wordsRouter)
 app.use('/api', authRouter);
+
 
 // Catch-all 404
 app.use(function (req, res, next) {

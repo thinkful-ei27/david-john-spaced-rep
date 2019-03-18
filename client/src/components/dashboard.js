@@ -13,6 +13,7 @@ export class Dashboard extends React.Component {
 
   moveRight(index) {
     console.log("right fired! with index");
+    console.log(this.props.words[this.props.wordsIndex].word + "'s correct: " + this.props.words[this.props.wordsIndex].correct + "\n incorrect: " + this.props.words[this.props.wordsIndex].incorrect)
     this.props.dispatch(moveWordIndexRight(index));
   }
 
@@ -34,7 +35,7 @@ export class Dashboard extends React.Component {
           <p className="mt-2">Shall we continue learning?</p>
           <p className="text-xl mt-8">Type the right answer</p>
           <p className="text-5xl mt-8">
-            {this.props.words[this.props.wordsIndex]}
+            {this.props.words[this.props.wordsIndex].word}
           </p>
           <AnswerInput
             type="text"
@@ -55,7 +56,7 @@ export class Dashboard extends React.Component {
             type="button"
             className="bg-orange hover:bg-orange-dark text-white font-bold py-2 px-4 rounded"
             onClick={() => {
-              console.log(`index is: ${this.props.wordsIndex}`);
+              console.log(`index is: ${this.props.wordsIndex}`)
               this.moveRight(this.props.wordsIndex);
               this.handleUserSubmitAnswer();
             }}
