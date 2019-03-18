@@ -3,6 +3,8 @@
 const express = require('express');
 const mongoose = require('mongoose');
 
+const History = require('../models/history');
+
 const router = express.Router();
 
 const testAnswers = [
@@ -20,26 +22,36 @@ router.use('/', passport.authenticate('jwt', {session: false, failWithError: tru
 
 router.post('/feedback', (req, res, next) => {
   const { word, answer } = req.body;
+  const userId = req.user.id;
 
   const wordPair = testAnswers.find(wordPair => wordPair.word === word);
 
   if (wordPair.answer === answer) {
-    return res.json({
-      response: 'Nice job!',
-      yourAnswer: `${answer}`,
-      correctAnswer: `${wordPair.answer}`,
-      word,
-      correct: true
-    });
-    
+    const newHist = { word, userId, correct: true };
+    return History.create(newHist)
+      .then(() => {
+        return res.json({
+          response: 'Nice job!',
+          yourAnswer: `${answer}`,
+          correctAnswer: `${wordPair.answer}`
+        });
+      })
+      .catch(err => {
+        next(err);
+      });
   } else if (wordPair.answer !== answer) {
-    return res.json({
-      response: `Incorrect. The correct answer is: ${wordPair.answer}`,
-      yourAnswer: `${answer}`,
-      correctAnswer: `${wordPair.answer}`,
-      word,
-      correct: false
-    });
+    const newHist = { word, userId, correct: false };
+    return History.create(newHist)
+      .then(() => {
+        return res.json({
+          response: `Incorrect. The correct answer is: ${wordPair.answer}`,
+          yourAnswer: `${answer}`,
+          correctAnswer: `${wordPair.answer}`
+        });
+      })
+      .catch(err => {
+        next(err);
+      });
   } else {
     return next();
   }
