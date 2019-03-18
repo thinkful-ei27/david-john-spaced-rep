@@ -3,20 +3,13 @@ import {
   SUBMIT_ANSWER_REQUEST,
   SUBMIT_ANSWER_SUCCESS,
   SUBMIT_ANSWER_ERROR,
-  MOVE_WORD_INDEX_RIGHT
+  UPDATE_WORD_START,
+  UPDATE_WORD_SUCCESS,
+  NEW_WORD_ERROR,
 } from "../actions/dashboard";
 
 const initialState = {
-  words: [
-    {word: "¡Hola!", correct: 0, incorrect: 0},
-    {word:"buenos días", correct: 0, incorrect: 0},
-    {word:"Buenas tardes", correct: 0, incorrect: 0},
-    {word:"Buenas noches", correct: 0, incorrect: 0},
-    {word:"Me llamo", correct: 0, incorrect: 0},
-    {word:"Gracias", correct: 0, incorrect: 0},
-    {word:"De nada", correct: 0, incorrect: 0}
-  ],
-  wordsIndex: 0,
+  word : null,
   answer: null,
   error: null,
   feedback: null,
@@ -35,9 +28,23 @@ export default function reducer(state = initialState, action) {
   //     error: action.error
   //   });
   // }
-  if (action.type === MOVE_WORD_INDEX_RIGHT) {
+
+  if (action.type === UPDATE_WORD_START) {
     return Object.assign({}, state, {
-      wordsIndex: action.wordsIndex + 1
+      loading: true,
+      error: null
+    });
+  }
+  if (action.type === UPDATE_WORD_SUCCESS) {
+    return Object.assign({}, state, {
+      word: action.word,
+      loading: false
+    });
+  }
+  if (action.type === NEW_WORD_ERROR) {
+    return Object.assign({}, state, {
+      loading: false,
+      error: action.error
     });
   }
   if (action.type === SET_ANSWER) {
