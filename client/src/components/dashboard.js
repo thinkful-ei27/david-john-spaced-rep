@@ -10,11 +10,13 @@ export class Dashboard extends React.Component {
   }
 
   render() {
+    let data = ["¡Hola!", "buenos días", "Buenas tardes", "Buenas noches", "Me llamo", "Gracias", "De nada"];
+    let dataIndex = 0;
     return (
       <div className="dashboard container mx-auto mt-32">
         <div className="answer-box bg-white rounded flex flex-col justify-center items-center">
           <p className="text-xl">Type the right answer</p>
-          <p className="text-5xl mt-8">¡Hola!</p>
+          <p className="text-5xl mt-8">{data[]}</p>
           <AnswerInput
             type="text"
             placeholder="Type english answer here"
