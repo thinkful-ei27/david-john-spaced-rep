@@ -21,13 +21,18 @@ router.post('/feedback', (req, res, next) => {
     return res.json({
       response: 'Nice job!',
       yourAnswer: `${answer}`,
-      correctAnswer: `${wordPair.answer}`
+      correctAnswer: `${wordPair.answer}`,
+      word,
+      correct: true
     });
+    
   } else if (wordPair.answer !== answer) {
     return res.json({
       response: `Incorrect. The correct answer is: ${wordPair.answer}`,
       yourAnswer: `${answer}`,
-      correctAnswer: `${wordPair.answer}`
+      correctAnswer: `${wordPair.answer}`,
+      word,
+      correct: false
     });
   } else {
     return next();
