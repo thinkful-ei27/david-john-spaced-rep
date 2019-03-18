@@ -48,7 +48,7 @@ export class Dashboard extends React.Component {
             Submit
           </button>
         </div>
-        <p>{this.props.feedback}</p>
+        <p className="text-center mt-8 text-xl">{this.props.feedback}</p>
       </div>
     );
   }
