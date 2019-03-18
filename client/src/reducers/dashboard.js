@@ -1,21 +1,14 @@
-import {
-  
-} from '';
+import { MOVE_WORD_INDEX_RIGHT } from "../actions/dashboard";
 
 const initialState = {
-  data: ["¡Hola!", "buenos días", "Buenas tardes", "Buenas noches", "Me llamo", "Gracias", "De nada"],
-  error: null
+  wordsIndex : 0,
+  words: ["¡Hola!", "buenos días", "Buenas tardes", "Buenas noches", "Me llamo", "Gracias", "De nada"],
 };
 
 export default function reducer(state = initialState, action) {
-  if (action.type === FETCH_PROTECTED_DATA_SUCCESS) {
+  if (action.type === MOVE_WORD_INDEX_RIGHT) {
       return Object.assign({}, state, {
-          data: action.data,
-          error: null
-      });
-  } else if (action.type === FETCH_PROTECTED_DATA_ERROR) {
-      return Object.assign({}, state, {
-          error: action.error
+        wordsIndex : (action.wordsIndex + 1)
       });
   }
   return state;
