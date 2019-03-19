@@ -2,9 +2,11 @@
 
 const express = require('express');
 const mongoose = require('mongoose');
+const spacedRep = require('../utils/spacedRep');
 
 const History = require('../models/history');
 const Words = require('../models/word');
+const User = require('../models/user');
 
 const router = express.Router();
 
@@ -22,10 +24,14 @@ router.post('/feedback', async (req, res, next) => {
     if (en === answer) {
       const newHist = { word, userId, correct: true };
       const create = await History.create(newHist);
+      const getList = await User.findOne({_id: userId}).exec();
+      const newList = await User.findOneAndUpdate({_id: userId}, {list: spacedRep(getList.list, newHist)})
+      // console.log(spacedRep(getList.list, newHist));
       res.json({
         response: 'Nice job!',
         yourAnswer: `${answer}`,
-        correctAnswer: `${en}`
+        correctAnswer: `${en}`,
+        newHist: spacedRep(getList.list, newHist)
       })
     } else {
       const newHist = { word, userId, correct: false };
