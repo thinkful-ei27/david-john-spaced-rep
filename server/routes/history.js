@@ -24,6 +24,28 @@ router.get('/', (req, res, next) => {
     });
 });
 
+/* ========== GET PROGRESS BY WORD ========== */
+router.get('/progress', (req, res, next) => {
+  const userId = req.user.id;
+  const {word} = req.query;
+
+  History.find({userId, word})
+    .then(items => {
+      const trueAns = items.filter(item => item.correct).length;
+      const falseAns = items.filter(item => !item.correct).length;
+      const percentage = Math.floor(trueAns / (items.length) * 100);
+      const obj = {
+        trueAns,
+        falseAns,
+        percentage
+      };
+      res.json(obj);
+    })
+    .catch(err => {
+      next(err);
+    });
+});
+
 /* ========== POST/CREATE AN ITEM ========== */
 router.post('/', (req, res, next) => {
   const { word, correct } = req.body;
