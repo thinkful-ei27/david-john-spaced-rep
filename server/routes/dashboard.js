@@ -19,7 +19,6 @@ router.post('/feedback', async (req, res, next) => {
   try {
     const dbRes = await Words.find({word});
     const {en} = dbRes[0];
-    console.log(en);
     if (en === answer) {
       const newHist = { word, userId, correct: true };
       const create = await History.create(newHist);

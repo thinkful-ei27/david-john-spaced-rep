@@ -28,11 +28,15 @@ export class Dashboard extends React.Component {
       display = <p>This is your first time seeing this word</p>;
     } else {
       const { percentage } = progress;
-      display = (
-        <p>
-          You answer {word} {percentage} % of the time
-        </p>
-      );
+      if (!percentage) {
+        display = <p>This is your first time seeing this word</p>;
+      } else {
+        display = (
+          <p>
+            You answer {word} {percentage} % of the time
+          </p>
+        );
+      }
     }
     return (
       <div className="dashboard container mx-auto mt-32">

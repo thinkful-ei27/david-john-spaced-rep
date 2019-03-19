@@ -1,3 +1,5 @@
+'use strict';
+
 const _Node = require('./node');
 
 class LinkedList {
@@ -6,8 +8,8 @@ class LinkedList {
   }
 
   addCycleNode(item1, item2) {
-    const node1 = new _Node(item1, this.head)
-    const node2 = new _Node(item2, node1)
+    const node1 = new _Node(item1, this.head);
+    const node2 = new _Node(item2, node1);
     node1.next = node2;
     this.head = node2;
   }

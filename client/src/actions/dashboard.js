@@ -107,11 +107,9 @@ export const submitAnswer = (val, word) => dispatch => {
   return axios(config)
     .then(response => {
       const { data } = response;
-      console.log(data.response);
       return dispatch(submitAnswerSuccess(data.response));
     })
     .then(() => {
-      console.log("we made it to get new word");
       return dispatch(getNewWord());
     })
     .catch(err => {
