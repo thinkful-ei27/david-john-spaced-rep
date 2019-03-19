@@ -114,5 +114,4 @@ const spaceFactory = (arr) => {
   }
 };
 
-spaceFactory(words);
-console.log(words);
+module.exports = spacedRep;
