@@ -8,7 +8,8 @@ const userSchema = new mongoose.Schema({
   lastName: {type: String, required: true},
   username: {type: String, required: true, unique: true},
   password: {type: String, required: true},
-  history: [{ type: mongoose.Schema.Types.ObjectId, ref: 'History' }]
+  history: [{ type: mongoose.Schema.Types.ObjectId, ref: 'History' }],
+  list: [{ type: mongoose.Schema.Types.ObjectId, ref: 'List' }]
 });
 
 userSchema.set('toJSON', {

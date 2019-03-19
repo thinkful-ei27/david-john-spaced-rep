@@ -20,6 +20,7 @@ const authRouter = require('./routes/auth');
 const dashboardRouter = require('./routes/dashboard');
 const wordsRouter = require('./routes/words');
 const historyRouter = require('./routes/history');
+const listRouter = require('./routes/list');
 
 const app = express();
 
@@ -47,6 +48,7 @@ app.use('/api/users', usersRouter);
 app.use('/api/dashboard', dashboardRouter);
 app.use('/api/words', wordsRouter);
 app.use('/api/history', historyRouter);
+app.use('/api/list', listRouter);
 app.use('/api', authRouter);
 
 

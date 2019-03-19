@@ -5,13 +5,23 @@ const mongoose = require('mongoose');
 
 const router = express.Router();
 const User = require('../models/user');
+const Word = require('../models/word');
 
 /* ========== GET USER ========== */
-// router.get('/:id', (req, res, next) => {
-//   const userId = req.user.id;
-//   console.log('User is ', req.user, 'User ID is', userId);
-//   // res.json(userId);
-// });
+router.get('/', (req, res, next) => {
+  const userId = req.user.id;
+
+  return Word
+    .find()
+    .then((_res) => {
+      console.log(_res);
+      res.json(_res);
+    })
+    .catch(e => {
+      console.log(e);
+      next(e.message);
+    });
+});
 
 /* ========== POST USERS ========== */
 router.post('/', (req, res, next) => {
