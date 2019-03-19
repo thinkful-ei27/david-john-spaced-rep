@@ -9,17 +9,24 @@ const Word = require('../models/word');
 
 /* ========== GET USER ========== */
 router.get('/', (req, res, next) => {
-  const userId = req.user.id;
+  // {word: 'A', next: 'B', m: 1, h: true}
 
-  return Word
-    .find()
-    .then((_res) => {
-      console.log(_res);
-      res.json(_res);
+  Word.find()
+    .then(words => {
+      const list = words.map((word, index) => {
+        // console.log(word);
+        const next = (words[index + 1] === undefined) ? words[0].word : words[index + 1].word;
+        return {
+          word: word.word,
+          next,
+          m: 1,
+          h: false
+        };
+      });
+      res.json(list);
     })
     .catch(e => {
-      console.log(e);
-      next(e.message);
+      next(e);
     });
 });
 
