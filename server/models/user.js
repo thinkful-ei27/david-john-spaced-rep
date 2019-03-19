@@ -9,7 +9,7 @@ const userSchema = new mongoose.Schema({
   username: {type: String, required: true, unique: true},
   password: {type: String, required: true},
   history: [{ type: mongoose.Schema.Types.ObjectId, ref: 'History' }],
-  list: [{ type: mongoose.Schema.Types.ObjectId, ref: 'List' }]
+  list: { type: Array }
 });
 
 userSchema.set('toJSON', {
