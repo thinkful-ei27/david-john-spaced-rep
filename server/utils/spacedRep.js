@@ -78,9 +78,9 @@ const spacedRep = (arr, feedback) => {
   // Move next by M; If m runs out of space, swap next with highest?
   // const next = (next + m) % arr.length;
   const {word, correct} = feedback;
+  console.log('tested word is ', word);
   // const checkWord = arr.find(arrWord => arrWord.word === word);
   for (let i = 0; i < arr.length; i++) {
-    console.log(arr[i]);
     if (arr[i].word === word && correct) {
       let m = arr[i].m;
       let next = arr[i].next;
@@ -103,13 +103,13 @@ const spacedRep = (arr, feedback) => {
 };
 
 const spaceFactory = (arr) => {
-  const head = arr.find(word => word.h === true);
-  console.log('head is ', head);
-  const feedback = {
-    word: head.word,
-    correct: Math.random() < 0.5 ? true: false
-  };
-  for (let i = 0; i < 2; i++) {
+  for (let i = 0; i < 200; i++) {
+    const head = arr.find(word => word.h === true);
+    // console.log('head is ', head);
+    const feedback = {
+      word: head.word,
+      correct: Math.random() < 0.5 ? true: false
+    };
     spacedRep(arr, feedback);
   }
 };
