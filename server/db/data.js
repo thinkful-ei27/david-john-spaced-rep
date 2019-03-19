@@ -32,13 +32,13 @@ const users = [
 ];
 
 const words = [
-  {'word' : '¡Hola!'},
-  {'word' : 'buenos días'},
-  {'word' : 'Buenas tardes'},
-  {'word' : 'Buenas noches'},
-  {'word' : 'Me llamo'},
-  {'word' : 'Gracias'},
-  {'word' : 'De nada'},
+  {word: '¡Hola!', en: 'hello'},
+  {word: 'buenos días', en: 'good morning'},
+  {word: 'Buenas tardes', en: 'good afternoon'},
+  {word: 'Buenas noches', en: 'goodnight'},
+  {word: 'Me llamo', en: 'my name is'},
+  {word: 'Gracias', en: 'thank you'},
+  {word: 'De nada', en: 'you are welcome'},
 ];
 
 const history = [

@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 
 const wordSchema = new mongoose.Schema({
   word: {type: String, required: true},
+  en: {type: String, required: true},
 });
 
 wordSchema.set('toJSON', {
@@ -11,7 +12,6 @@ wordSchema.set('toJSON', {
   transform: (doc, result) => {
     delete result._id;
     delete result.__v;
-    delete result.password;
   }
 });
 

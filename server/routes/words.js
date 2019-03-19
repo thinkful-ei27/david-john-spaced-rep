@@ -2,7 +2,7 @@
 
 const express = require('express');
 const mongoose = require('mongoose');
-const Word = require('../models/word')
+const Word = require('../models/word');
 const router = express.Router();
 
 
@@ -16,13 +16,13 @@ router.get('/', (req, res, next) => {
   if (index > 5) {
     index = 0;
   } else {
-    index = index + 1
+    index = index + 1;
   }
   return Word.find()
     .then( (_res) =>
-    res.json({
-      word: _res[index]
-    }));
+      res.json({
+        word: _res[index]
+      }));
 });
 
 module.exports = router;
