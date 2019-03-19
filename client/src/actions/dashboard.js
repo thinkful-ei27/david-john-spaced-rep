@@ -63,13 +63,16 @@ export const getNewWord = () => (dispatch, getState) => {
   dispatch(updateWordStart());
   const config = {
     method: "GET",
-    url: `${API_BASE_URL}/words`
+    url: `${API_BASE_URL}/words`,
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${localStorage.authToken}`
+    }
   };
   return axios(config)
-    .then(({ data }) => {
-      const { word } = data.word;
-      // console.log(data.word.word);
-      dispatch(updateWordSuccess(word));
+    .then((word) => {
+       console.log(word);
+      dispatch(updateWordSuccess(word.data));
       return word;
     })
     .then(async word => {
