@@ -31,7 +31,6 @@ router.post('/feedback', async (req, res, next) => {
         response: 'Nice job!',
         yourAnswer: `${answer}`,
         correctAnswer: `${en}`,
-        newHist: spacedRep(getList.list, newHist)
       })
     } else {
       const newHist = { word, userId, correct: false };
