@@ -1,4 +1,3 @@
-
 export const UPDATE_INPUT = "UPDATE_INPUT";
 
 export const updateInput = input => {
@@ -7,5 +6,3 @@ export const updateInput = input => {
     input
   };
 };
-
-export const update
