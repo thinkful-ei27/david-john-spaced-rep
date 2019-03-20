@@ -8,4 +8,3 @@ export const updateInput = input => {
   };
 };
 
-export const update
