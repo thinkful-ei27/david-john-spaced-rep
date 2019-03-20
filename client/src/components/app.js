@@ -6,6 +6,7 @@ import LandingPage from "./landing-page";
 import Dashboard from "./dashboard";
 import RegistrationPage from "./registration-page";
 import LoginPage from "./LoginPage";
+import ChatBox from './chat'
 import { refreshAuthToken } from "../actions/auth";
 import Header from "./Header";
 import Account from "./Account";
@@ -52,6 +53,7 @@ export class App extends React.Component {
     return (
       <div className="app">
         <Header />
+        <Route exact path="/chat" component={ChatBox} />
         <Route exact path="/" component={LandingPage} />
         <Route exact path="/dashboard" component={Dashboard} />
         <Route exact path="/account" component={Account} />
