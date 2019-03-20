@@ -7,7 +7,9 @@ import {
   UPDATE_WORD_SUCCESS,
   NEW_WORD_ERROR,
   SET_PROGRESS_REQUEST,
-  SET_PROGRESS_SUCCESS
+  SET_PROGRESS_SUCCESS,
+  FULL_PROGRESS_REQUEST,
+  FULL_PROGRESS_SUCCESS
 } from "../actions/dashboard";
 
 const initialState = {
@@ -16,7 +18,8 @@ const initialState = {
   error: null,
   feedback: null,
   loading: null,
-  progress: null
+  progress: null,
+  fullProgress: null
 };
 
 export default function reducer(state = initialState, action) {
@@ -82,6 +85,18 @@ export default function reducer(state = initialState, action) {
   if (action.type === SET_PROGRESS_SUCCESS) {
     return Object.assign({}, state, {
       progress: action.progress,
+      loading: false
+    });
+  }
+  if (action.type === FULL_PROGRESS_REQUEST) {
+    return Object.assign({}, state, {
+      loading: true,
+      error: null
+    });
+  }
+  if (action.type === FULL_PROGRESS_SUCCESS) {
+    return Object.assign({}, state, {
+      fullProgress: action.fullProgress,
       loading: false
     });
   }

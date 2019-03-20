@@ -2,12 +2,18 @@ import React from "react";
 import { connect } from "react-redux";
 import requiresLogin from "./requires-login";
 import AnswerInput from "./AnswerInput";
-import { submitAnswer, setAnswer, getNewWord } from "../actions/dashboard";
+import {
+  submitAnswer,
+  setAnswer,
+  getNewWord,
+  fullProgress
+} from "../actions/dashboard";
 
 export class Dashboard extends React.Component {
   componentDidMount() {
     if (this.props.hasAuthToken) {
       this.props.dispatch(getNewWord());
+      this.props.dispatch(fullProgress());
     }
   }
 

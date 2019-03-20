@@ -13,6 +13,7 @@ export class HeaderBar extends React.Component {
   render() {
     // Only render the log out button if we are logged in
     let logInAndOutButton;
+    let accountOrRegisterButton;
     if (this.props.loggedIn) {
       logInAndOutButton = (
         <button
@@ -22,6 +23,16 @@ export class HeaderBar extends React.Component {
         >
           Log out
         </button>
+      );
+      accountOrRegisterButton = (
+        <Link to="Account">
+          <button
+            type="button"
+            className="bg-orange hover:bg-orange-dark text-white font-bold py-2 px-4 rounded"
+          >
+            Account
+          </button>
+        </Link>
       );
     } else {
       logInAndOutButton = (
@@ -34,6 +45,16 @@ export class HeaderBar extends React.Component {
           </button>
         </Link>
       );
+      accountOrRegisterButton = (
+        <Link to="Register">
+          <button
+            type="button"
+            className="bg-orange hover:bg-orange-dark text-white font-bold py-2 px-4 rounded"
+          >
+            Register
+          </button>
+        </Link>
+      );
     }
     return (
       <nav
@@ -43,16 +64,7 @@ export class HeaderBar extends React.Component {
       >
         <ul className="list-reset flex flex-row justify-end">
           <li>{logInAndOutButton}</li>
-          <li>
-            <Link to="Register">
-              <button
-                type="button"
-                className="bg-orange hover:bg-orange-dark text-white font-bold py-2 px-4 rounded"
-              >
-                Register
-              </button>
-            </Link>
-          </li>
+          <li>{accountOrRegisterButton}</li>
         </ul>
       </nav>
     );

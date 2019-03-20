@@ -31,7 +31,6 @@ router.get('/progress', (req, res, next) => {
 
   History.find({userId, word})
     .then(items => {
-      console.log('we have items', items);
       const trueAns = items.filter(item => item.correct).length;
       const falseAns = items.filter(item => !item.correct).length;
       const percentage = Math.floor(trueAns / (items.length) * 100);
@@ -41,6 +40,36 @@ router.get('/progress', (req, res, next) => {
         percentage
       };
       res.json(obj);
+    })
+    .catch(err => {
+      next(err);
+    });
+});
+
+/* ========== GET ALL PROGRESS ========== */
+router.get('/progress/all', (req, res, next) => {
+  const userId = req.user.id;
+
+  History.find({userId})
+    .sort('word')
+    .then(results => {
+      // Modify results for all words
+      const getWord = (obj) => obj.word;
+      const groupBy = (arr, fn) =>
+        arr.map(typeof fn === 'function' ? fn : val => val[fn]).reduce((acc, val, i) => {
+          acc[val] = (acc[val] || []).concat(arr[i]);
+          return acc;
+        }, {});
+      const final = groupBy(results, getWord);
+      const grouping = {};
+      const agg = Object.keys(final).map(key => {
+        let right = final[key].filter(ans => ans.correct === true).length;
+        let wrong = final[key].filter(ans => ans.correct === false).length;
+        let total = final[key].length;
+        let percentage = Math.floor(right / total * 100);
+        grouping[key] = {right, wrong, total, percentage};
+      });
+      res.json(grouping);
     })
     .catch(err => {
       next(err);

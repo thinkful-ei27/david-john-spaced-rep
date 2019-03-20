@@ -9,8 +9,16 @@ import LoginPage from "./LoginPage";
 import { refreshAuthToken } from "../actions/auth";
 import Header from "./Header";
 import Account from "./Account";
+import { getNewWord, fullProgress } from "../actions/dashboard";
 
 export class App extends React.Component {
+  componentDidMount() {
+    if (this.props.hasAuthToken) {
+      this.props.dispatch(getNewWord());
+      this.props.dispatch(fullProgress());
+    }
+  }
+
   componentDidUpdate(prevProps) {
     if (!prevProps.loggedIn && this.props.loggedIn) {
       // When we are logged in, refresh the auth token periodically

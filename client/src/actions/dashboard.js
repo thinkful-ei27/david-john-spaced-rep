@@ -10,6 +10,8 @@ export const SUBMIT_ANSWER_SUCCESS = "SUBMIT_ANSWER_SUCCESS";
 export const SUBMIT_ANSWER_ERROR = "SUBMIT_ANSWER_ERROR";
 export const SET_PROGRESS_REQUEST = "SET_PROGRESS_REQUEST";
 export const SET_PROGRESS_SUCCESS = "SET_PROGRESS_SUCCESS";
+export const FULL_PROGRESS_REQUEST = "FULL_PROGRESS_REQUEST";
+export const FULL_PROGRESS_SUCCESS = "FULL_PROGRESS_SUCCESS";
 
 export const updateWordSuccess = word => {
   return {
@@ -58,6 +60,35 @@ export const setProgressSuccess = progress => ({
   progress
 });
 
+export const fullProgressRequest = () => ({
+  type: FULL_PROGRESS_REQUEST
+});
+
+export const fullProgressSuccess = fullProgress => ({
+  type: FULL_PROGRESS_SUCCESS,
+  fullProgress
+});
+
+export const fullProgress = () => dispatch => {
+  dispatch(fullProgressRequest());
+  const config = {
+    method: "GET",
+    url: `${API_BASE_URL}/history/progress/all`,
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${localStorage.authToken}`
+    }
+  };
+  return axios(config)
+    .then(progress => {
+      dispatch(fullProgressSuccess(progress.data));
+      return progress.data;
+    })
+    .catch(e => {
+      console.log(e);
+    });
+};
+
 export const getNewWord = () => (dispatch, getState) => {
   // const authToken = getState().auth.authToken;
   dispatch(updateWordStart());
@@ -71,7 +102,6 @@ export const getNewWord = () => (dispatch, getState) => {
   };
   return axios(config)
     .then(word => {
-      console.log(word);
       dispatch(updateWordSuccess(word.data));
       return word;
     })

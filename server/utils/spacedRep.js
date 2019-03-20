@@ -63,9 +63,6 @@ const listFromObj = (obj, sll) => {
 
 };
 
-// listFromObj(list, objList);
-// display(objList);
-
 const spacedRepLL = (ll, feedback) => {
   const {word, correct} = feedback;
   const {curr} = ll.find(word);
