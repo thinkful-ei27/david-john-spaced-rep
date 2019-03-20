@@ -81,29 +81,28 @@ const spacedRep = (arr, feedback) => {
   console.log('tested word is ', word);
   // const checkWord = arr.find(arrWord => arrWord.word === word);
   for (let i = 0; i < arr.length; i++) {
-    if (arr[i].word === word && correct) {
+    if (arr[i].word === word) {
       let m = arr[i].m;
       let next = arr[i].next;
-      arr[i].m = m * 2;
-      arr[i].next = (next + arr[i].m) % arr.length;
+      arr[i].m =  correct ? (arr[i].m * 2) : 1
+      arr.forEach(wordOfArr => {
+        if (wordOfArr.next === i) {
+          arr[i].next = wordOfArr.next
+        }
+      })
+      arr[i + arr[i].m].next = i;
+      //change next based on % ret val
+      //may have duplicate, find duplicate, change to not be duplicate
+      //
       arr[i].h = false;
-      arr[next].h = true;
+      arr[i + arr[i].m].h = true;
       break;
-    } else if (arr[i].word === word && !correct) {
-      let m = arr[i].m;
-      let next = arr[i].next;
-      arr[i].m = 1;
-      arr[i].next = (next + m) % arr.length;
-      arr[i].h = false;
-      arr[next].h = true;
-      break;
-    }
   }
   return arr;
 };
-
+}
 const spaceFactory = (arr) => {
-  for (let i = 0; i < 200; i++) {
+  for (let i = 0; i < 350; i++) {
     const head = arr.find(word => word.h === true);
     // console.log('head is ', head);
     const feedback = {
@@ -114,4 +113,6 @@ const spaceFactory = (arr) => {
   }
 };
 
-module.exports = spacedRep;
+console.log(spaceFactory(words))
+console.log(words)
+module.exports = spacedRep
