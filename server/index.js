@@ -2,12 +2,13 @@
 
 const express = require('express');
 const cors = require('cors');
+const http = require("http");
 const morgan = require('morgan');
 const mongoose = require('mongoose');
 const passport = require('passport');
 const localStrategy = require('./passport/local');
 const jwtStrategy = require('./passport/jwt');
-
+const socketIo = require("socket.io");
 const wordArr = [{},{}];
 
 const { PORT, CLIENT_ORIGIN } = require('./config');
@@ -21,7 +22,8 @@ const dashboardRouter = require('./routes/dashboard');
 const wordsRouter = require('./routes/words');
 const historyRouter = require('./routes/history');
 const listRouter = require('./routes/list');
-
+const chatRouter = require('./routes/chat');
+const chatApp = express();
 const app = express();
 
 app.use(
@@ -50,6 +52,11 @@ app.use('/api/words', wordsRouter);
 app.use('/api/history', historyRouter);
 app.use('/api/list', listRouter);
 app.use('/api', authRouter);
+chatApp.use('/api/chat', chatRouter)
+
+// app.get('/api/chat', function(req, res) {
+//   res.sendFile(__dirname + '/index.html')
+// })
 
 
 // Catch-all 404
@@ -68,6 +75,17 @@ app.use((err, req, res, next) => {
     res.status(500).json({ message: 'Internal Server Error' });
   }
 });
+const chatServer = http.createServer(chatApp).listen(4010)
+const io = socketIo(chatServer)
+
+io.on('connection', (client) => {
+  console.log("connected")
+  client.on('logMe', (interval) => {
+    console.log('LogMe logged! HELL YEAHH!');
+    client.emit('I-logged')
+  });
+});
+
 
 function runServer(port = PORT) {
   const server = app
@@ -78,6 +96,7 @@ function runServer(port = PORT) {
       console.error('Express failed to start');
       console.error(err);
     });
+  
 }
 
 if (require.main === module) {
