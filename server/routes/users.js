@@ -6,7 +6,7 @@ const mongoose = require('mongoose');
 const router = express.Router();
 const User = require('../models/user');
 const Word = require('../models/word');
-const wordsListFromFile = require('../db/data');
+const {list} = require('../db/data');
 
 /* ========== GET USER ========== */
 router.get('/', (req, res, next) => {
@@ -129,8 +129,8 @@ router.post('/', (req, res, next) => {
           list[0].h = true;
           return list;
         })
-        .then(list => {
-          return User.findOneAndUpdate({username: users.username}, {list: wordsListFromFile});
+        .then(() => {
+          return User.findOneAndUpdate({username: users.username}, {list: list});
         })
         .then(update => {
           return User.find({username});
