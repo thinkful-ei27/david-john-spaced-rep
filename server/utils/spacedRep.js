@@ -51,7 +51,7 @@ const listFromObj = (obj, sll) => {
   let {head} = obj;
   let next = head.next;
   let value = head.value;
-  let m = head.value;
+  let m = head.m;
 
   while (next !== null) {
     sll.insertLast(value, m);
@@ -62,9 +62,14 @@ const listFromObj = (obj, sll) => {
 
 };
 
+listFromObj(list, objList);
+display(objList);
+
 const spacedRepLL = (ll, feedback) => {
   const {word, correct} = feedback;
   const {curr} = ll.find(word);
+
+  console.log('did we find a word?', curr);
 
   if (curr.next !== null) {
     curr.m = correct ? curr.m * 2 : 1;
