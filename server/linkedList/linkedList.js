@@ -27,19 +27,19 @@ class LinkedList {
     return {prev, curr};
   }
 
-  insertFirst(item) {
-    this.head = new _Node(item, 1, this.head);
+  insertFirst(item, m=1) {
+    this.head = new _Node(item, m, this.head);
   }
 
-  insertLast(item) {
+  insertLast(item, m=1) {
     if (this.head === null) {
-      this.insertFirst(item);
+      this.insertFirst(item, m);
     } else {
       let tempNode = this.head;
       while (tempNode.next !== null) {
         tempNode = tempNode.next;
       }
-      tempNode.next = new _Node(item, 1, null);
+      tempNode.next = new _Node(item, m, null);
     }
   }
 }

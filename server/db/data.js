@@ -1,55 +1,74 @@
 'use strict';
 
+const list = {
+  'head': {
+    'value': '¡Hola!',
+    'm': 1,
+    'next': {
+      'value': 'buenos días',
+      'm': 1,
+      'next': {
+        'value': 'Buenas tardes',
+        'm': 1,
+        'next': {
+          'value': 'Buenas noches',
+          'm': 1,
+          'next': {
+            'value': 'Me llamo',
+            'm': 1,
+            'next': {
+              'value': 'Gracias',
+              'm': 1,
+              'next': {
+                'value': 'De nada',
+                'm': 1,
+                'next': null
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+};
+
 const users = [
   {  '_id': '222222222222222222222200',
     'firstName': 'Johnny',
     'lastName': 'Salt',
     'username': 'johnnysalt',
     'password': '$2a$10$F3WxoCmNFelMJuUbFMTXWO.nrEhQg1GNfuwgItE3l6fb8Bfso0cLa',
-    'list': [
-      {
-        'word': '¡Hola!',
-        'next': 1,
+    'list': {
+      'head': {
+        'value': '¡Hola!',
         'm': 1,
-        'h': true
-      },
-      {
-        'word': 'buenos días',
-        'next': 2,
-        'm': 1,
-        'h': false
-      },
-      {
-        'word': 'Buenas tardes',
-        'next': 3,
-        'm': 1,
-        'h': false
-      },
-      {
-        'word': 'Buenas noches',
-        'next': 4,
-        'm': 1,
-        'h': false
-      },
-      {
-        'word': 'Me llamo',
-        'next': 5,
-        'm': 1,
-        'h': false
-      },
-      {
-        'word': 'Gracias',
-        'next': 6,
-        'm': 1,
-        'h': false
-      },
-      {
-        'word': 'De nada',
-        'next': 0,
-        'm': 1,
-        'h': false
+        'next': {
+          'value': 'buenos días',
+          'm': 1,
+          'next': {
+            'value': 'Buenas tardes',
+            'm': 1,
+            'next': {
+              'value': 'Buenas noches',
+              'm': 1,
+              'next': {
+                'value': 'Me llamo',
+                'm': 1,
+                'next': {
+                  'value': 'Gracias',
+                  'm': 1,
+                  'next': {
+                    'value': 'De nada',
+                    'm': 1,
+                    'next': null
+                  }
+                }
+              }
+            }
+          }
+        }
       }
-    ]
+    }
   },
   {
     '_id': '333333333333333333333300',
@@ -58,50 +77,37 @@ const users = [
     'username': 'bobuser',
     // hash digest for the string 'password'
     'password': '$2a$10$0S5GdCkGJTDeaAH272/bmeZmmpC4rv6ItXIOZKwVQIfQOqSURhkhu',
-    'list': [
-      {
-        'word': '¡Hola!',
-        'next': 1,
+    'list': {
+      'head': {
+        'value': '¡Hola!',
         'm': 1,
-        'h': true
-      },
-      {
-        'word': 'buenos días',
-        'next': 2,
-        'm': 1,
-        'h': false
-      },
-      {
-        'word': 'Buenas tardes',
-        'next': 3,
-        'm': 1,
-        'h': false
-      },
-      {
-        'word': 'Buenas noches',
-        'next': 4,
-        'm': 1,
-        'h': false
-      },
-      {
-        'word': 'Me llamo',
-        'next': 5,
-        'm': 1,
-        'h': false
-      },
-      {
-        'word': 'Gracias',
-        'next': 6,
-        'm': 1,
-        'h': false
-      },
-      {
-        'word': 'De nada',
-        'next': 0,
-        'm': 1,
-        'h': false
+        'next': {
+          'value': 'buenos días',
+          'm': 1,
+          'next': {
+            'value': 'Buenas tardes',
+            'm': 1,
+            'next': {
+              'value': 'Buenas noches',
+              'm': 1,
+              'next': {
+                'value': 'Me llamo',
+                'm': 1,
+                'next': {
+                  'value': 'Gracias',
+                  'm': 1,
+                  'next': {
+                    'value': 'De nada',
+                    'm': 1,
+                    'next': null
+                  }
+                }
+              }
+            }
+          }
+        }
       }
-    ]
+    }
   },
   {
     '_id' : '5c3f5ca9ec37422f44bdaa82',
@@ -109,50 +115,37 @@ const users = [
     'lastName': 'salt',
     'username' : 'thejohnnysalt',
     'password' : '$2a$10$hpBGDg4mlyzVM/7g4staJuA4fuaznzY64b6/s0SwkLWrblT7vEgDK',
-    'list': [
-      {
-        'word': '¡Hola!',
-        'next': 1,
+    'list': {
+      'head': {
+        'value': '¡Hola!',
         'm': 1,
-        'h': true
-      },
-      {
-        'word': 'buenos días',
-        'next': 2,
-        'm': 1,
-        'h': false
-      },
-      {
-        'word': 'Buenas tardes',
-        'next': 3,
-        'm': 1,
-        'h': false
-      },
-      {
-        'word': 'Buenas noches',
-        'next': 4,
-        'm': 1,
-        'h': false
-      },
-      {
-        'word': 'Me llamo',
-        'next': 5,
-        'm': 1,
-        'h': false
-      },
-      {
-        'word': 'Gracias',
-        'next': 6,
-        'm': 1,
-        'h': false
-      },
-      {
-        'word': 'De nada',
-        'next': 0,
-        'm': 1,
-        'h': false
+        'next': {
+          'value': 'buenos días',
+          'm': 1,
+          'next': {
+            'value': 'Buenas tardes',
+            'm': 1,
+            'next': {
+              'value': 'Buenas noches',
+              'm': 1,
+              'next': {
+                'value': 'Me llamo',
+                'm': 1,
+                'next': {
+                  'value': 'Gracias',
+                  'm': 1,
+                  'next': {
+                    'value': 'De nada',
+                    'm': 1,
+                    'next': null
+                  }
+                }
+              }
+            }
+          }
+        }
       }
-    ]
+    }
   },
   {
     '_id' : '5c3f5ca9ec37422f44bdaa82',
@@ -160,50 +153,37 @@ const users = [
     'lastName': 'Johnson',
     'username' : 'David',
     'password' : '$2a$10$vl5HbC.PsF85oL1ZikE8i.kdrUbnLGqd75FiGaHx1CB7ar0BFOAsW',
-    'list': [
-      {
-        'word': '¡Hola!',
-        'next': 1,
+    'list': {
+      'head': {
+        'value': '¡Hola!',
         'm': 1,
-        'h': true
-      },
-      {
-        'word': 'buenos días',
-        'next': 2,
-        'm': 1,
-        'h': false
-      },
-      {
-        'word': 'Buenas tardes',
-        'next': 3,
-        'm': 1,
-        'h': false
-      },
-      {
-        'word': 'Buenas noches',
-        'next': 4,
-        'm': 1,
-        'h': false
-      },
-      {
-        'word': 'Me llamo',
-        'next': 5,
-        'm': 1,
-        'h': false
-      },
-      {
-        'word': 'Gracias',
-        'next': 6,
-        'm': 1,
-        'h': false
-      },
-      {
-        'word': 'De nada',
-        'next': 0,
-        'm': 1,
-        'h': false
+        'next': {
+          'value': 'buenos días',
+          'm': 1,
+          'next': {
+            'value': 'Buenas tardes',
+            'm': 1,
+            'next': {
+              'value': 'Buenas noches',
+              'm': 1,
+              'next': {
+                'value': 'Me llamo',
+                'm': 1,
+                'next': {
+                  'value': 'Gracias',
+                  'm': 1,
+                  'next': {
+                    'value': 'De nada',
+                    'm': 1,
+                    'next': null
+                  }
+                }
+              }
+            }
+          }
+        }
       }
-    ]
+    }
   }
 ];
 
@@ -259,5 +239,6 @@ const history = [
 module.exports = {
   users,
   history,
-  words
+  words,
+  list
 };

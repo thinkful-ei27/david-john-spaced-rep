@@ -11,50 +11,59 @@ ll.insertLast('Me llamo');
 ll.insertLast('Gracias');
 ll.insertLast('De nada');
 
-const list = [
-  {
-    'word': '¡Hola!',
-    'next': 1,
+// display(ll);
+
+const list = {
+  'head': {
+    'value': '¡Hola!',
     'm': 1,
-    'h': true
-  },
-  {
-    'word': 'buenos días',
-    'next': 2,
-    'm': 1,
-    'h': false
-  },
-  {
-    'word': 'Buenas tardes',
-    'next': 3,
-    'm': 1,
-    'h': false
-  },
-  {
-    'word': 'Buenas noches',
-    'next': 4,
-    'm': 1,
-    'h': false
-  },
-  {
-    'word': 'Me llamo',
-    'next': 5,
-    'm': 1,
-    'h': false
-  },
-  {
-    'word': 'Gracias',
-    'next': 6,
-    'm': 1,
-    'h': false
-  },
-  {
-    'word': 'De nada',
-    'next': 0,
-    'm': 1,
-    'h': false
+    'next': {
+      'value': 'buenos días',
+      'm': 1,
+      'next': {
+        'value': 'Buenas tardes',
+        'm': 1,
+        'next': {
+          'value': 'Buenas noches',
+          'm': 1,
+          'next': {
+            'value': 'Me llamo',
+            'm': 1,
+            'next': {
+              'value': 'Gracias',
+              'm': 1,
+              'next': {
+                'value': 'De nada',
+                'm': 1,
+                'next': null
+              }
+            }
+          }
+        }
+      }
+    }
   }
-];
+};
+
+const objList = new LinkedList();
+
+const listFromObj = (obj) => {
+  let {head} = obj;
+  let next = head.next;
+  let value = head.value;
+  let m = head.value;
+
+  while (next !== null) {
+    objList.insertLast(value, m);
+    value = next.value;
+    m = next.m;
+    next = next.next;
+  }
+
+};
+
+listFromObj(list);
+display(objList);
 
 const spacedRepLL = (ll, feedback) => {
   const {word, correct} = feedback;
@@ -76,7 +85,7 @@ const spaceFactory = (ll) => {
     const word = ll.first().value;
     const feedback = {
       word,
-      correct: Math.random() < 0.75 ? true: false
+      correct: Math.random() < 0.20 ? true: false
     };
     console.log('feedback is ', feedback);
     spacedRepLL(ll, feedback);
@@ -85,12 +94,12 @@ const spaceFactory = (ll) => {
 
 // spaceFactory(words);
 // console.log(words);
-console.log('before the swap');
-display(ll);
+// console.log('before the swap');
+// display(ll);
 // spacedRepLL(ll, {word: 'A', correct: false});
-spaceFactory(ll);
-console.log('after the swap');
-display(ll);
+// spaceFactory(ll);
+// console.log('after the swap');
+// display(ll);
 
 
 // module.exports = spacedRep;
