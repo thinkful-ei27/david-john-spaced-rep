@@ -10,7 +10,7 @@ const socket = openSocket('http://localhost:4010');
 export class ChatBox extends React.Component {
   componentDidMount() {
     socket.on('I-logged', (obj) => {
-      console.log(`server and client got a connection! ${obj.word}, the correct answer is: ${obj.answer}`)
+      this.props.dispatch(updateTextArea(obj.outputString))
     });
   }
 
@@ -25,8 +25,7 @@ export class ChatBox extends React.Component {
   handleSubmit(e) {
     e.preventDefault();
     console.log(this.props.inputWord)
-    this.props.dispatch(updateTextArea(this.props.username))
-    socket.emit('logMe', (this.props.inputWord))
+    socket.emit('logMe', {input: this.props.inputWord, username: this.props.username})
   }
 
 

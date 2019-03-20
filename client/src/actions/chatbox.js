@@ -8,9 +8,9 @@ export const updateInput = input => {
   };
 };
 
-export const updateTextArea = userName => {
+export const updateTextArea = outputString => {
   return {
     type: UPDATE_TEXTAREA,
-    userName
+    outputString
   }
 }

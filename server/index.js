@@ -81,9 +81,8 @@ const io = socketIo(chatServer)
 io.on('connection', (client) => {
   console.log("connected")
   client.on('logMe', (input) => {
-    console.log(`LogMe logged!: ${input}`);
-    let obj = {word: "word", answer: "Correct"}
-    io.sockets.emit('I-logged', obj)
+    const outputString = `${input.username}: ${input.input}`;
+    io.sockets.emit('I-logged', {outputString})
   });
 });
 
