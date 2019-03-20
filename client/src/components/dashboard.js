@@ -1,8 +1,19 @@
 import React from "react";
 import { connect } from "react-redux";
+import { withRouter, Redirect } from "react-router-dom";
 import requiresLogin from "./requires-login";
 import AnswerInput from "./AnswerInput";
+import openSocket from 'socket.io-client';
 import { submitAnswer, setAnswer, getNewWord } from "../actions/dashboard";
+
+const socket = openSocket('http://localhost:4010');
+
+// function socketLogger() {
+//   socket.emit('logMe')
+//   socket.on('I-logged', () => {
+//     console.log("server and client got a connection!")
+//   });
+// }
 
 export class Dashboard extends React.Component {
   componentDidMount() {
@@ -11,6 +22,7 @@ export class Dashboard extends React.Component {
 
   newWord() {
     this.props.dispatch(getNewWord());
+    // socketLogger();
   }
 
   handleUpdateAnswer(val) {

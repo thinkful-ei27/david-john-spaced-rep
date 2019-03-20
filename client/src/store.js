@@ -5,6 +5,7 @@ import { loadAuthToken } from "./local-storage";
 import authReducer from "./reducers/auth";
 import protectedDataReducer from "./reducers/protected-data";
 import dashBoardReducer from "./reducers/dashboard";
+import chatBoxReducer from './reducers/chatbox'
 import { setAuthToken, refreshAuthToken } from "./actions/auth";
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
@@ -14,7 +15,8 @@ const store = createStore(
     form: formReducer,
     auth: authReducer,
     protectedData: protectedDataReducer,
-    dashBoard: dashBoardReducer
+    dashBoard: dashBoardReducer,
+    chatBox : chatBoxReducer
   }),
   composeEnhancers(applyMiddleware(thunk))
 );

@@ -1,0 +1,48 @@
+#container {
+  /* background-color:rgb(0, 255, 221); */
+  position: relative;
+  top: 100px;
+  text-align:center;
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+}
+
+#outer-glow-box {
+  box-shadow: 2px 10px 40px 30px rgba(0,0,0,0.75);
+  border: 1.75px solid gold;
+  border-radius: 3% 3% 0px 0px;
+  max-width: 600px;
+  min-width: 450px;
+  background-color: rgb(252, 140, 65);
+  min-height: 492.5px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+#text-box {
+  background-color: white;
+  border-radius: 3%;
+  min-width: 97.5%;
+  min-height: 350px;
+  border: 1.75px solid gold;
+  border-radius: 3%;
+}
+
+#input-form {
+  display: flex;
+  flex-direction: column;
+  border-radius: 3%;
+  justify-content: space-evenly;
+  background-color: rgb(31, 0, 14);
+}
+
+.message {
+  height: 60px;
+}
+.submit-button {
+  border-radius: 4%;
+  height: 10%;
+}
+
