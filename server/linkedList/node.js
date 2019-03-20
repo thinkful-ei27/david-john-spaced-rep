@@ -1,8 +1,9 @@
 'use strict';
 
 class _Node {
-  constructor(value, next) {
+  constructor(value, m, next) {
     this.value=value;
+    this.m=m;
     this.next=next;
   }
 }

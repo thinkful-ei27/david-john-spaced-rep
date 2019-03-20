@@ -7,27 +7,6 @@ const router = express.Router();
 const User = require('../models/user');
 const Word = require('../models/word');
 
-const hydrateWords = () => {
-  Word.find()
-    .then(words => {
-      const list = words.map((word, index) => {
-      // console.log(word);
-        const next = (words[index + 1] === undefined) ? 0 : index + 1;
-        return {
-          word: word.word,
-          next,
-          m: 1,
-          h: false
-        };
-      });
-      list[0].h = true;
-      return list;
-    })
-    .catch(e => {
-      console.log(e);
-    });
-};
-
 /* ========== GET USER ========== */
 router.get('/', (req, res, next) => {
   // {word: 'A', next: 'B', m: 1, h: true}
