@@ -31,6 +31,7 @@ router.get('/progress', (req, res, next) => {
 
   History.find({userId, word})
     .then(items => {
+      console.log('we have items', items);
       const trueAns = items.filter(item => item.correct).length;
       const falseAns = items.filter(item => !item.correct).length;
       const percentage = Math.floor(trueAns / (items.length) * 100);

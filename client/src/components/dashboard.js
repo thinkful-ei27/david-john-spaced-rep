@@ -6,7 +6,9 @@ import { submitAnswer, setAnswer, getNewWord } from "../actions/dashboard";
 
 export class Dashboard extends React.Component {
   componentDidMount() {
-    this.props.dispatch(getNewWord());
+    if (this.props.hasAuthToken) {
+      this.props.dispatch(getNewWord());
+    }
   }
 
   newWord() {
@@ -87,7 +89,8 @@ const mapStateToProps = state => {
     wordsIndex: state.dashBoard.wordsIndex,
     answer: state.dashBoard.answer,
     feedback: state.dashBoard.feedback,
-    progress: state.dashBoard.progress
+    progress: state.dashBoard.progress,
+    hasAuthToken: state.auth.authToken !== null
   };
 };
 

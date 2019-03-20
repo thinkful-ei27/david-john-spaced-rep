@@ -16,7 +16,10 @@ let index = -1;
 router.get('/', (req, res, next) => {
   const userId = req.user.id;
   return User.find({_id: userId})
-  .then (wordObj => res.json(wordObj[0].list[0].head.value))
+    .then(wordObj => res.json(wordObj[0].list[0].head.value))
+    .catch(e => {
+      next(e);
+    });
 });
 
 module.exports = router;

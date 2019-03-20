@@ -46,9 +46,7 @@ router.post('/feedback', async (req, res, next) => {
       const create = await History.create(newHist);
       const getList = await User.findOne({_id: userId}).exec();
       const transform = await transformList(getList.list[0], newHist);
-      console.log(transform);
       const newList = await User.findOneAndUpdate({_id: userId}, {list: transform})
-      // console.log(spacedRep(getList.list, newHist));
       res.json({
         response: 'Nice job!',
         yourAnswer: `${answer}`,
@@ -57,6 +55,9 @@ router.post('/feedback', async (req, res, next) => {
     } else {
       const newHist = { word, userId, correct: false };
       const create = await History.create(newHist);
+      const getList = await User.findOne({_id: userId}).exec();
+      const transform = await transformList(getList.list[0], newHist);
+      const newList = await User.findOneAndUpdate({_id: userId}, {list: transform})
       res.json({
         response: `Incorrect. The correct answer is: ${en}`,
         yourAnswer: `${answer}`,

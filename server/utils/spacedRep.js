@@ -59,17 +59,16 @@ const listFromObj = (obj, sll) => {
     m = next.m;
     next = next.next;
   }
+  sll.insertLast(value, m);
 
 };
 
-listFromObj(list, objList);
-display(objList);
+// listFromObj(list, objList);
+// display(objList);
 
 const spacedRepLL = (ll, feedback) => {
   const {word, correct} = feedback;
   const {curr} = ll.find(word);
-
-  console.log('did we find a word?', curr);
 
   if (curr.next !== null) {
     curr.m = correct ? curr.m * 2 : 1;
@@ -82,15 +81,18 @@ const spacedRepLL = (ll, feedback) => {
   }
 };
 
-const spaceFactory = (ll) => {
-  for (let i = 0; i < 200; i++) {
+const spaceFactory = (listObj) => {
+  for (let i = 0; i < 50; i++) {
+    const ll = new LinkedList();
+    listFromObj(listObj, ll);
+    listObj = JSON.stringify(ll, null, 2);
     const word = ll.first().value;
     const feedback = {
       word,
-      correct: Math.random() < 0.20 ? true: false
+      correct: Math.random() < 0.50 ? true: false
     };
-    console.log('feedback is ', feedback);
     spacedRepLL(ll, feedback);
+    listObj = ll;
   }
 };
 
@@ -102,6 +104,8 @@ const spaceFactory = (ll) => {
 // spaceFactory(ll);
 // console.log('after the swap');
 // display(ll);
+// spaceFactory(list);
+// console.log(JSON.stringify(list, null, 2));
 
 
 module.exports = {

@@ -70,8 +70,8 @@ export const getNewWord = () => (dispatch, getState) => {
     }
   };
   return axios(config)
-    .then((word) => {
-       console.log(word);
+    .then(word => {
+      console.log(word);
       dispatch(updateWordSuccess(word.data));
       return word;
     })
@@ -79,7 +79,7 @@ export const getNewWord = () => (dispatch, getState) => {
       dispatch(setProgressRequest());
       const config2 = {
         method: "get",
-        url: `${API_BASE_URL}/history/progress?word=${word}`,
+        url: `${API_BASE_URL}/history/progress?word=${word.data}`,
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${localStorage.authToken}`
