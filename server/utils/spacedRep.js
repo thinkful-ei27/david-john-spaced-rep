@@ -47,23 +47,20 @@ const list = {
 
 const objList = new LinkedList();
 
-const listFromObj = (obj) => {
+const listFromObj = (obj, sll) => {
   let {head} = obj;
   let next = head.next;
   let value = head.value;
   let m = head.value;
 
   while (next !== null) {
-    objList.insertLast(value, m);
+    sll.insertLast(value, m);
     value = next.value;
     m = next.m;
     next = next.next;
   }
 
 };
-
-listFromObj(list);
-display(objList);
 
 const spacedRepLL = (ll, feedback) => {
   const {word, correct} = feedback;
@@ -102,4 +99,7 @@ const spaceFactory = (ll) => {
 // display(ll);
 
 
-// module.exports = spacedRep;
+module.exports = {
+  spacedRepLL,
+  listFromObj,
+};
