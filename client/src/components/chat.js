@@ -66,7 +66,7 @@ export class ChatBox extends React.Component {
             readOnly
             value={this.props.textArea}
           /> */}
-          <ul className="mt-8 list-reset w-full max-w-sm h-64 max-h-lg flex flex-col break-words">
+          <ul className="mt-8 list-reset w-full max-w-sm h-64 max-h-lg flex flex-col break-words overflow-auto">
             {messages}
           </ul>
           <form
