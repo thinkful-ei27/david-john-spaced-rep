@@ -79,11 +79,8 @@ function emitQuestion() {
   io.sockets.emit('question', outputObj);
   waitForAnswer = true;
 }
-let interval = setInterval(emitQuestion, 35000);
+let interval = setInterval(emitQuestion, 2000);
 let score = {};
-
-function userScore(userName) {
-}
 
 let questionAnswerArr = [
   {question: '¡Hola!', answer: 'hello'},

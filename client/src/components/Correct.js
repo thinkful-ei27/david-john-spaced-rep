@@ -1,7 +1,7 @@
 import React from "react";
 
 export default function Correct(props) {
-  const { userName } = props;
+  const { userName, score } = props;
   return (
     <div
       className="self-center bg-teal-lightest border-t-4 border-teal rounded-b text-teal-darkest px-4 py-3 shadow-md mb-4 max-w-lg"
@@ -18,7 +18,9 @@ export default function Correct(props) {
           </svg>
         </div>
         <div>
-          <p className="font-bold">{userName} got it right!</p>
+          <p className="font-bold">
+            {userName} got it right! Current score: {score}
+          </p>
           <p className="text-sm">Getting ready for the next question...</p>
         </div>
       </div>
