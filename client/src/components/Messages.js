@@ -17,7 +17,7 @@ function Messages(props) {
     );
   });
   return (
-    <ul className="mt-8 list-reset w-full max-w-lg h-64 max-h-lg flex flex-col break-words overflow-auto">
+    <ul className="mt-8 list-reset w-full max-w-lg h-64 max-h-full flex flex-col break-words overflow-auto">
       {messages}
     </ul>
   );

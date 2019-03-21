@@ -68,6 +68,19 @@ app.use((err, req, res, next) => {
 let waitForAnswer = false;
 const server = require('http').createServer(app);
 const io = require('socket.io').listen(server);
+
+function emitQuestion() {
+  arrIndex = Math.floor(Math.random() * questionAnswerArr.length);
+  const questionAnswerObj = questionAnswerArr[arrIndex];
+  console.log('Outputting question', questionAnswerObj.question, ' to all clients');
+  const outputObj = {type: 'server', userName: 'server',
+    value: `What is the english translation for ${questionAnswerObj.question}?`,
+    answer: questionAnswerObj.answer};
+  io.sockets.emit('question', outputObj);
+  waitForAnswer = true;
+}
+let interval = setInterval(emitQuestion, 35000);
+
 let questionAnswerArr = [
   {question: '¡Hola!', answer: 'hello'},
   {question: 'buenos días', answer: 'good morning'},
@@ -88,27 +101,15 @@ io.sockets.on('connection', (client) => {
       console.log('emmiting answer');
       waitForAnswer = false;
       outputObject = {type: 'answer', userName: input.username, value:input.input};
+      clearInterval(interval);
+      emitQuestion();
+      interval = setInterval(emitQuestion, 35000);
     } else {
       outputObject = {type: 'message', userName: input.username, value:input.input};
     }
     io.sockets.emit('I-logged', outputObject);
   });
 });
-//an event to listen for an answer, when question is fired
-//(in that event), when the correct word is given, fire event to say who won
-//turn off that event
-//
-setInterval(
-  function() { 
-    arrIndex = Math.floor(Math.random() * questionAnswerArr.length);
-    const questionAnswerObj = questionAnswerArr[arrIndex];
-    console.log('Outputting question', questionAnswerObj.question, ' to all clients');
-    const outputObj = {type: 'server', userName: 'server',
-      value: `What is the english translation for ${questionAnswerObj.question}?`,
-      answer: questionAnswerObj.answer};
-    io.sockets.emit('question', outputObj);
-    waitForAnswer = true;
-  }, 15000);
 
 function runServer(port = PORT) {
   server
