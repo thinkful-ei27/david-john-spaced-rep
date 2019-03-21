@@ -10,7 +10,7 @@ import {
   fullProgress
 } from "../actions/dashboard";
 import openSocket from 'socket.io-client';
-const socket = openSocket('http://localhost:4010');
+// const socket = openSocket('http://localhost:4010');
 
 // function socketLogger() {
 //   socket.emit('logMe')
