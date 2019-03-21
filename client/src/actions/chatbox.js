@@ -16,10 +16,9 @@ export const updateTextArea = updateObject => {
   };
 };
 
-export const updateQuestion = object => {
+export const updateQuestion = updateObject => {
   return {
-    type: UPDATE_TEXTAREA,
-    question: object.question,
-    answer: object.answer
+    type: UPDATE_QUESTION,
+    updateObject
   };
 };
