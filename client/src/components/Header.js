@@ -25,7 +25,7 @@ export class HeaderBar extends React.Component {
         </button>
       );
       accountOrRegisterButton = (
-        <Link to="Account">
+        <Link to="/account">
           <button
             type="button"
             className="bg-orange hover:bg-orange-dark text-white font-bold py-2 px-4 rounded"
@@ -46,7 +46,7 @@ export class HeaderBar extends React.Component {
         </Link>
       );
       accountOrRegisterButton = (
-        <Link to="Register">
+        <Link to="/register">
           <button
             type="button"
             className="bg-orange hover:bg-orange-dark text-white font-bold py-2 px-4 rounded"
@@ -63,6 +63,16 @@ export class HeaderBar extends React.Component {
         className="max-w-full w-screen shadow flex fixed pin-t pin-x h-16 items-center justify-end bg-white px-4"
       >
         <ul className="list-reset flex flex-row justify-end">
+          <li>
+            <Link to="/chat">
+              <button
+                type="button"
+                className="bg-white hover:text-orange-dark font-bold py-2 px-4 rounded"
+              >
+                Chat
+              </button>
+            </Link>
+          </li>
           <li>{logInAndOutButton}</li>
           <li>{accountOrRegisterButton}</li>
         </ul>
