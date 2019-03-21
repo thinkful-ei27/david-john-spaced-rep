@@ -8,7 +8,7 @@ const mongoose = require('mongoose');
 const passport = require('passport');
 const localStrategy = require('./passport/local');
 const jwtStrategy = require('./passport/jwt');
-const socketIo = require('socket.io');
+const io = require('socket.io');
 const wordArr = [{},{}];
 
 const { PORT, CLIENT_ORIGIN, CHAT_PORT } = require('./config');
@@ -32,11 +32,7 @@ app.use(
   })
 );
 
-app.use(
-  cors({
-    origin: CLIENT_ORIGIN
-  })
-);
+app.use(cors());
 
 // Parse request body
 app.use(express.json());
@@ -76,10 +72,9 @@ app.use((err, req, res, next) => {
   }
 });
 
-const chatServer = http.createServer(chatApp).listen(CHAT_PORT, () => {
-  console.info(`App listening on port ${chatServer.address().port}`);
-});
-const io = socketIo(chatServer);
+// const chatServer = http.createServer(chatApp).listen(CHAT_PORT, () => {
+//   console.info(`App listening on port ${chatServer.address().port}`);
+// });
 
 io.on('connection', (client) => {
   console.log('connected');
@@ -95,6 +90,7 @@ function runServer(port = PORT) {
     .listen(port, () => {
       console.info(`App listening on port ${server.address().port}`);
     })
+    io.listen(server)
     .on('error', err => {
       console.error('Express failed to start');
       console.error(err);
