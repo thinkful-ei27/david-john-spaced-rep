@@ -74,11 +74,27 @@ io.sockets.on('connection', (client) => {
     const outputObject = {type: 'message', userName: input.username, value:input.input};
     io.sockets.emit('I-logged', outputObject);
   });
+  let questionAnswerArr = [
+    {question: '¡Hola!', answer: 'hello'},
+    {question: 'buenos días', answer: 'good morning'},
+    {question: 'Buenas tardes', answer: 'good afternoon'},
+    {question: 'Buenas noches', answer: 'good night'},
+    {question: 'Me llamo', answer: 'my name'},
+    {question: 'Gracias', answer: 'thank you'},
+    {question: 'De nada', answer: 'you\'re welcome'},
+   ]
 
   setInterval(
     function() { 
-      io.sockets.emit('newQuestion', {type: 'question', userName: 'server',  value:'What is the english word for hola?', answer: 'hello'});
-    }, 10000);
+      const arrIndex = Math.floor(Math.random() * questionAnswerArr.length)
+      const questionAnswerObj = questionAnswerArr[arrIndex]
+      console.log("Outputting question", questionAnswerObj.question, " to all clients")
+      const outputObj = {type: 'message', userName: 'server',
+       value: `What is the english translation for ${questionAnswerObj.question}?`,
+       answer: questionAnswerObj.answer}
+
+      io.sockets.emit('question', outputObj);
+    }, 25000);
 });
 
 function runServer(port = PORT) {
