@@ -9,6 +9,7 @@ import {
 } from "../actions/chatbox";
 // import "../styles/chatbox.css";
 import { CHAT_BASE_URL } from "../config";
+import Messages from "./Messages";
 
 const socket = openSocket(CHAT_BASE_URL);
 
@@ -39,16 +40,6 @@ export class ChatBox extends React.Component {
   }
 
   render() {
-    const { textArea } = this.props;
-    const messages = textArea.map(msg => {
-      const { userName, value } = msg;
-      return (
-        <li className="mb-4">
-          <span className="ml-2 mr-4 font-bold w-1/5">{userName}</span>
-          <span className="w-4/5">{value}</span>
-        </li>
-      );
-    });
     return (
       <section id="container mx-auto">
         <div className="flex flex-col flex-wrap mt-32 justify-center align-center items-center">
@@ -56,21 +47,14 @@ export class ChatBox extends React.Component {
           <p className="text-xl text-grey-darker font-thin">
             Compete against other players for (no) prizes!
           </p>
-          <p className="w-full max-w-sm mt-8 text-grey-darker">
+          <p className="w-full max-w-lg mt-8 text-grey-darker">
             <span className="font-semibold">How to play:</span> Our bot will
             present the channel with a Spanish word. The first person to type
             the english translation will win.
           </p>
-          {/* <textarea
-            className="mx-auto w-full max-w-sm h-64 max-h-lg"
-            readOnly
-            value={this.props.textArea}
-          /> */}
-          <ul className="mt-8 list-reset w-full max-w-sm h-64 max-h-lg flex flex-col break-words overflow-auto">
-            {messages}
-          </ul>
+          <Messages />
           <form
-            className="w-full max-w-sm"
+            className="w-full max-w-lg"
             action=""
             method="POST"
             id="input-form"

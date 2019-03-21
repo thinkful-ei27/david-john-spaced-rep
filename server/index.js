@@ -76,16 +76,16 @@ let questionAnswerArr = [
   {question: 'Me llamo', answer: 'my name'},
   {question: 'Gracias', answer: 'thank you'},
   {question: 'De nada', answer: 'you\'re welcome'},
- ]
- let arrIndex = Math.floor(Math.random() * questionAnswerArr.length)
+];
+let arrIndex = Math.floor(Math.random() * questionAnswerArr.length);
 io.sockets.on('connection', (client) => {
   console.log('connected');
 
   client.on('logMe', (input) => {
     let outputObject;
-    console.log('logMe logged')
+    console.log('logMe logged');
     if (input.input === questionAnswerArr[arrIndex].answer && waitForAnswer) {
-      console.log('emmiting answer')
+      console.log('emmiting answer');
       waitForAnswer = false;
       outputObject = {type: 'answer', userName: input.username, value:input.input};
     } else {
@@ -100,15 +100,15 @@ io.sockets.on('connection', (client) => {
 //
 setInterval(
   function() { 
-    arrIndex = Math.floor(Math.random() * questionAnswerArr.length)
-    const questionAnswerObj = questionAnswerArr[arrIndex]
-    console.log("Outputting question", questionAnswerObj.question, " to all clients")
+    arrIndex = Math.floor(Math.random() * questionAnswerArr.length);
+    const questionAnswerObj = questionAnswerArr[arrIndex];
+    console.log('Outputting question', questionAnswerObj.question, ' to all clients');
     const outputObj = {type: 'server', userName: 'server',
-     value: `What is the english translation for ${questionAnswerObj.question}?`,
-     answer: questionAnswerObj.answer}
-    io.sockets.emit('question', outputObj)
+      value: `What is the english translation for ${questionAnswerObj.question}?`,
+      answer: questionAnswerObj.answer};
+    io.sockets.emit('question', outputObj);
     waitForAnswer = true;
-  }, 35000);
+  }, 15000);
 
 function runServer(port = PORT) {
   server
