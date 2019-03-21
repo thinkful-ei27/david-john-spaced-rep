@@ -65,18 +65,9 @@ app.use((err, req, res, next) => {
   }
 });
 
+let waitForAnswer = false;
 const server = require('http').createServer(app);
 const io = require('socket.io').listen(server);
-
-io.sockets.on('connection', (client) => {
-  console.log('connected');
-  client.on('logMe', (input) => {
-    const outputObject = {type: 'message', userName: input.username, value:input.input};
-    io.sockets.emit('I-logged', outputObject);
-  });
-
-
-});
 let questionAnswerArr = [
   {question: '¡Hola!', answer: 'hello'},
   {question: 'buenos días', answer: 'good morning'},
@@ -86,16 +77,37 @@ let questionAnswerArr = [
   {question: 'Gracias', answer: 'thank you'},
   {question: 'De nada', answer: 'you\'re welcome'},
  ]
+ let arrIndex = Math.floor(Math.random() * questionAnswerArr.length)
+io.sockets.on('connection', (client) => {
+  console.log('connected');
+
+  client.on('logMe', (input) => {
+    let outputObject;
+    console.log('logMe logged')
+    if (input.input === questionAnswerArr[arrIndex].answer && waitForAnswer) {
+      console.log('emmiting answer')
+      waitForAnswer = false;
+      outputObject = {type: 'answer', userName: input.username, value:input.input};
+    } else {
+      outputObject = {type: 'message', userName: input.username, value:input.input};
+    }
+    io.sockets.emit('I-logged', outputObject);
+  });
+});
+//an event to listen for an answer, when question is fired
+//(in that event), when the correct word is given, fire event to say who won
+//turn off that event
+//
 setInterval(
   function() { 
-    const arrIndex = Math.floor(Math.random() * questionAnswerArr.length)
+    arrIndex = Math.floor(Math.random() * questionAnswerArr.length)
     const questionAnswerObj = questionAnswerArr[arrIndex]
     console.log("Outputting question", questionAnswerObj.question, " to all clients")
-    const outputObj = {type: 'message', userName: 'server',
+    const outputObj = {type: 'server', userName: 'server',
      value: `What is the english translation for ${questionAnswerObj.question}?`,
      answer: questionAnswerObj.answer}
-
-    io.sockets.emit('question', outputObj);
+    io.sockets.emit('question', outputObj)
+    waitForAnswer = true;
   }, 35000);
 
 function runServer(port = PORT) {

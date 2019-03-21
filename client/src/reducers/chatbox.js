@@ -7,7 +7,6 @@ import {
 const initialState = {
   inputWord: "",
   textArea: [],
-  answer: ""
 };
 
 export default function reducer(state = initialState, action) {
@@ -26,7 +25,6 @@ export default function reducer(state = initialState, action) {
   if (action.type === UPDATE_QUESTION) {
     return Object.assign({}, state, {
       textArea: [...state.textArea, action.updateObject],
-      // answer: action.updateObject.answer
     });
   }
 
