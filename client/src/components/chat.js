@@ -2,7 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import openSocket from 'socket.io-client';
 import requiresLogin from "./requires-login";
-import { updateInput, updateTextArea } from "../actions/chatbox";
+import { updateInput, updateTextArea, updateQuestion } from "../actions/chatbox";
 import "../styles/chatbox.css";
 import { CHAT_BASE_URL } from "../config";
 
@@ -13,6 +13,9 @@ export class ChatBox extends React.Component {
     socket.on("I-logged", obj => {
       this.props.dispatch(updateTextArea(obj.outputString));
     });
+    socket.on("question", obj => {
+      this.props.dispatch(updateQuestion(obj))
+    })
   }
 
   socketLogger() {
@@ -69,7 +72,9 @@ const mapStateToProps = state => {
     username: state.auth.currentUser.username,
     name: `${currentUser.firstName} ${currentUser.lastName}`,
     inputWord: state.chatBox.inputWord,
-    textArea: state.chatBox.textArea
+    textArea: state.chatBox.textArea,
+    question: state.chatBox.question,
+    answer: state.chatBox.answer
   };
 };
 

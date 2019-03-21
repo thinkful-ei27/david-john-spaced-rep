@@ -73,9 +73,14 @@ const io = require('socket.io').listen(server);
 io.sockets.on('connection', (client) => {
   console.log('connected');
   client.on('logMe', (input) => {
-    const outputString = `${input.username}: ${input.input}`;
-    io.sockets.emit('I-logged', {outputString});
+    const outputObject = {type: "message", userName: input.username, value:input.input};
+    io.sockets.emit('I-logged', {outputObject});
   });
+
+  setInterval(
+    function() { 
+      io.sockets.emit('newQuestion', {type: "question", userName: "server",  value:"What is the english word for hola?", answer: "hello"});;
+    }, 10000);
 });
 
 function runServer(port = PORT) {

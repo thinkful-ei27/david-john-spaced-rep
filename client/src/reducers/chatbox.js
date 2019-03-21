@@ -1,11 +1,13 @@
 import {
 UPDATE_INPUT,
 UPDATE_TEXTAREA,
+UPDATE_QUESTION,
 } from "../actions/chatbox";
 
 const initialState = {
   inputWord: "",
-  textArea: ""
+  textArea: [],
+  answer:""
 };
 
 export default function reducer(state = initialState, action) {
@@ -16,10 +18,15 @@ export default function reducer(state = initialState, action) {
     });
 
   } else  if (action.type === UPDATE_TEXTAREA) {
-    var newline = String.fromCharCode(13, 10);
     return Object.assign({}, state, {
-      textArea: `${state.textArea} ${newline} ${action.outputString}`,
+      textArea: [...textArea, action.updateObject],
       inputWord : "",
+    });
+
+  } else  if (action.type === UPDATE_QUESTION) {
+    return Object.assign({}, state, {
+      textArea: [...textArea, action.updateObject],
+      answer: action.updateObject.answer
     });
   }
 

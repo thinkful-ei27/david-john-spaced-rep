@@ -1,5 +1,7 @@
 export const UPDATE_INPUT = "UPDATE_INPUT";
-export const UPDATE_TEXTAREA = "UPDATE_TEXTAREA"
+export const UPDATE_TEXTAREA = "UPDATE_TEXTAREA";
+export const UPDATE_QUESTION = "UPDATE_QUESTION";
+
 export const updateInput = input => {
   return {
     type: UPDATE_INPUT,
@@ -7,9 +9,19 @@ export const updateInput = input => {
   };
 };
 
-export const updateTextArea = outputString => {
+export const updateTextArea = updateObject => {
   return {
     type: UPDATE_TEXTAREA,
-    outputString
+    updateObject, 
   }
 }
+
+
+export const updateQuestion = object => {
+  return {
+    type: UPDATE_TEXTAREA,
+    question: object.question,
+    answer: object.answer
+  }
+}
+
