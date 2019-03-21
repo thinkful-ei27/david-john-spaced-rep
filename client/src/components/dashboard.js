@@ -9,15 +9,6 @@ import {
   getNewWord,
   fullProgress
 } from "../actions/dashboard";
-import openSocket from 'socket.io-client';
-// const socket = openSocket('http://localhost:4010');
-
-// function socketLogger() {
-//   socket.emit('logMe')
-//   socket.on('I-logged', () => {
-//     console.log("server and client got a connection!")
-//   });
-// }
 
 export class Dashboard extends React.Component {
   componentDidMount() {
