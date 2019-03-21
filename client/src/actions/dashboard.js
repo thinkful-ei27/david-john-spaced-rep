@@ -92,6 +92,7 @@ export const fullProgress = () => dispatch => {
 export const getNewWord = () => (dispatch, getState) => {
   // const authToken = getState().auth.authToken;
   dispatch(updateWordStart());
+  console.log(localStorage.authToken);
   const config = {
     method: "GET",
     url: `${API_BASE_URL}/words`,

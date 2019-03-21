@@ -12,7 +12,7 @@ import {
 
 export class Dashboard extends React.Component {
   componentDidMount() {
-    if (this.props.hasAuthToken) {
+    if (localStorage.authToken) {
       this.props.dispatch(getNewWord());
       this.props.dispatch(fullProgress());
     }

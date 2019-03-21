@@ -38,8 +38,8 @@ export const authError = error => ({
 const storeAuthInfo = (authToken, dispatch) => {
   const decodedToken = jwtDecode(authToken);
   dispatch(setAuthToken(authToken));
-  dispatch(authSuccess(decodedToken.user));
   saveAuthToken(authToken);
+  dispatch(authSuccess(decodedToken.user));
 };
 
 export const login = (username, password, firstName, lastName) => dispatch => {

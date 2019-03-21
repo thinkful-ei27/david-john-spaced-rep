@@ -32,7 +32,6 @@ export class ChatBox extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    console.log(this.props.inputWord);
     socket.emit("logMe", {
       input: this.props.inputWord,
       username: this.props.username
@@ -45,14 +44,14 @@ export class ChatBox extends React.Component {
       const { userName, value } = msg;
       return (
         <li className="mb-4">
-          <span className="ml-2 mr-4 font-bold">{userName}</span>
-          <span>{value}</span>
+          <span className="ml-2 mr-4 font-bold w-1/5">{userName}</span>
+          <span className="w-4/5">{value}</span>
         </li>
       );
     });
     return (
       <section id="container mx-auto">
-        <div className="flex flex-col mt-32 justify-center align-center items-center">
+        <div className="flex flex-col flex-wrap mt-32 justify-center align-center items-center">
           <h1 className="text-grey-darkest">Chat App</h1>
           <p className="text-xl text-grey-darker font-thin">
             Compete against other players for (no) prizes!
@@ -67,7 +66,9 @@ export class ChatBox extends React.Component {
             readOnly
             value={this.props.textArea}
           /> */}
-          <ul className="list-reset w-full max-w-sm">{messages}</ul>
+          <ul className="mt-8 list-reset w-full max-w-sm h-64 max-h-lg flex flex-col break-words">
+            {messages}
+          </ul>
           <form
             className="w-full max-w-sm"
             action=""

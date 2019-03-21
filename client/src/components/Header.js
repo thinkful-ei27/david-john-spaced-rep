@@ -14,7 +14,18 @@ export class HeaderBar extends React.Component {
     // Only render the log out button if we are logged in
     let logInAndOutButton;
     let accountOrRegisterButton;
+    let chat;
     if (this.props.loggedIn) {
+      chat = (
+        <Link to="/chat">
+          <button
+            type="button"
+            className="bg-white hover:text-orange-dark font-bold py-2 px-4 rounded"
+          >
+            Chat
+          </button>
+        </Link>
+      );
       logInAndOutButton = (
         <button
           type="button"
@@ -63,16 +74,7 @@ export class HeaderBar extends React.Component {
         className="max-w-full w-screen shadow flex fixed pin-t pin-x h-16 items-center justify-end bg-white px-4"
       >
         <ul className="list-reset flex flex-row justify-end">
-          <li>
-            <Link to="/chat">
-              <button
-                type="button"
-                className="bg-white hover:text-orange-dark font-bold py-2 px-4 rounded"
-              >
-                Chat
-              </button>
-            </Link>
-          </li>
+          <li>{chat}</li>
           <li>{logInAndOutButton}</li>
           <li>{accountOrRegisterButton}</li>
         </ul>
