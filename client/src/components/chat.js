@@ -1,9 +1,9 @@
 import React from "react";
 import { connect } from "react-redux";
-import openSocket from 'socket.io-client';
+import openSocket from "socket.io-client";
 import requiresLogin from "./requires-login";
 import { updateInput, updateTextArea } from "../actions/chatbox";
-import "../styles/chatbox.css";
+// import "../styles/chatbox.css";
 import { CHAT_BASE_URL } from "../config";
 
 const socket = openSocket(CHAT_BASE_URL);
@@ -33,32 +33,63 @@ export class ChatBox extends React.Component {
   }
 
   render() {
+    const testMessage = [
+      { type: "message", username: "johny", value: "hey whats up" },
+      { type: "message", username: "daveyjones", value: "nm, u?" },
+      { type: "message", username: "johny", value: "chillin" }
+    ];
+    const messages = testMessage.map(msg => {
+      const { username, value } = msg;
+      return (
+        <li className="mb-4">
+          <span className="ml-2 mr-4 font-bold">{username}</span>
+          <span>{value}</span>
+        </li>
+      );
+    });
     return (
-      <div id="container">
-        <div id="outer-glow-box">
+      <section id="container mx-auto">
+        <div className="flex flex-col mt-32 justify-center align-center items-center">
+          <h1 className="text-grey-darkest">Chat App</h1>
+          <p className="text-xl text-grey-darker font-thin">
+            Compete against other players for (no) prizes!
+          </p>
+          <p className="w-full max-w-sm mt-8 text-grey-darker">
+            <span className="font-semibold">How to play:</span> Our bot will
+            present the channel with a Spanish word. The first person to type
+            the english translation will win.
+          </p>
           <textarea
-            className="text-box"
-            rows="20"
+            className="mx-auto w-full max-w-sm h-64 max-h-lg"
             readOnly
             value={this.props.textArea}
           />
+          <ul className="list-reset w-full max-w-sm">{messages}</ul>
           <form
+            className="w-full max-w-sm"
             action=""
             method="POST"
             id="input-form"
             onSubmit={e => this.handleSubmit(e)}
           >
-            <input
-              type="text"
-              className="message"
-              placeholder="Your Message..."
-              onChange={e => this.updateInput(e.target.value)}
-              value={this.props.inputWord}
-            />
-            <input type="submit" className="submit-button" />
+            <div className="flex items-center border-b border-b-2 border-orange py-2">
+              <input
+                type="text"
+                className="appearance-none bg-transparent border-none w-full text-grey-darker mr-3 py-1 px-2 leading-tight focus:outline-none"
+                placeholder="Your Message..."
+                onChange={e => this.updateInput(e.target.value)}
+                value={this.props.inputWord}
+              />
+              <button
+                type="submit"
+                className="flex-no-shrink bg-orange hover:bg-orange-dark border-orange hover:border-orange-dark text-sm border-4 text-white py-1 px-2 rounded"
+              >
+                Submit
+              </button>
+            </div>
           </form>
         </div>
-      </div>
+      </section>
     );
   }
 }
