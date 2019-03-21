@@ -80,6 +80,10 @@ function emitQuestion() {
   waitForAnswer = true;
 }
 let interval = setInterval(emitQuestion, 35000);
+let score = {};
+
+function userScore(userName) {
+}
 
 let questionAnswerArr = [
   {question: '¡Hola!', answer: 'hello'},
@@ -88,7 +92,7 @@ let questionAnswerArr = [
   {question: 'Buenas noches', answer: 'good night'},
   {question: 'Me llamo', answer: 'my name'},
   {question: 'Gracias', answer: 'thank you'},
-  {question: 'De nada', answer: 'you\'re welcome'},
+  {question: 'De nada', answer: 'you are welcome'},
 ];
 let arrIndex = Math.floor(Math.random() * questionAnswerArr.length);
 io.sockets.on('connection', (client) => {
@@ -98,11 +102,16 @@ io.sockets.on('connection', (client) => {
     let outputObject;
     console.log('logMe logged');
     if (input.input === questionAnswerArr[arrIndex].answer && waitForAnswer) {
+      if (score[input.userName]) {
+        score[input.userName]++;
+      } else {
+        score[input.userName] = 1;
+      }
       console.log('emmiting answer');
       waitForAnswer = false;
-      outputObject = {type: 'answer', userName: input.username, value:input.input};
+      outputObject = {type: 'answer', userName: input.username, value: input.input, score : score[input.userName]};
       clearInterval(interval);
-      emitQuestion();
+      setTimeout(emitQuestion, 2000);
       interval = setInterval(emitQuestion, 35000);
     } else {
       outputObject = {type: 'message', userName: input.username, value:input.input};
