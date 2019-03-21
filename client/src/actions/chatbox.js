@@ -12,16 +12,14 @@ export const updateInput = input => {
 export const updateTextArea = updateObject => {
   return {
     type: UPDATE_TEXTAREA,
-    updateObject, 
-  }
-}
-
+    updateObject
+  };
+};
 
 export const updateQuestion = object => {
   return {
     type: UPDATE_TEXTAREA,
     question: object.question,
     answer: object.answer
-  }
-}
-
+  };
+};

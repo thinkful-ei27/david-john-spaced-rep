@@ -2,14 +2,12 @@
 
 const express = require('express');
 const cors = require('cors');
-const http = require('http');
 const morgan = require('morgan');
-const mongoose = require('mongoose');
 const passport = require('passport');
 const localStrategy = require('./passport/local');
 const jwtStrategy = require('./passport/jwt');
 
-const { PORT, CLIENT_ORIGIN, CHAT_PORT } = require('./config');
+const { PORT, CLIENT_ORIGIN } = require('./config');
 const { dbConnect } = require('./db-mongoose');
 // const {dbConnect} = require('./db-knex');
 
@@ -73,13 +71,13 @@ const io = require('socket.io').listen(server);
 io.sockets.on('connection', (client) => {
   console.log('connected');
   client.on('logMe', (input) => {
-    const outputObject = {type: "message", userName: input.username, value:input.input};
-    io.sockets.emit('I-logged', {outputObject});
+    const outputObject = {type: 'message', userName: input.username, value:input.input};
+    io.sockets.emit('I-logged', outputObject);
   });
 
   setInterval(
     function() { 
-      io.sockets.emit('newQuestion', {type: "question", userName: "server",  value:"What is the english word for hola?", answer: "hello"});;
+      io.sockets.emit('newQuestion', {type: 'question', userName: 'server',  value:'What is the english word for hola?', answer: 'hello'});
     }, 10000);
 });
 
