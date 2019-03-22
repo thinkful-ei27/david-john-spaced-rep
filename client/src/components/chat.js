@@ -60,7 +60,7 @@ export class ChatBox extends React.Component {
           </div>
         </div>
         <form
-          className="w-full max-w-lg fixed pin-b pin-x mb-32 mx-auto"
+          className="w-full max-w-lg fixed pin-b pin-x mb-16 mx-auto"
           action=""
           method="POST"
           id="input-form"
