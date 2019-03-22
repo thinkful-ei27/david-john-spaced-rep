@@ -19,12 +19,12 @@ export default function reducer(state = initialState, action) {
     console.log(action.updateObject);
     return Object.assign({}, state, {
       textArea: [...state.textArea, action.updateObject],
-      inputWord: ""
     });
   }
   if (action.type === UPDATE_QUESTION) {
     return Object.assign({}, state, {
       textArea: [...state.textArea, action.updateObject],
+      inputWord: ""
     });
   }
 

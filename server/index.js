@@ -64,7 +64,7 @@ app.use((err, req, res, next) => {
     res.status(500).json({ message: 'Internal Server Error' });
   }
 });
-
+/////////////////////////////////////Chat server///////////////////////////////////////////////////////////////////////////////
 let waitForAnswer = false;
 const server = require('http').createServer(app);
 const io = require('socket.io').listen(server);
@@ -79,9 +79,9 @@ function emitQuestion() {
   io.sockets.emit('question', outputObj);
   waitForAnswer = true;
 }
-let interval = setInterval(emitQuestion, 2000);
-let score = {};
+let interval = setInterval(emitQuestion, 20000);
 
+let scoreObj = {};
 let questionAnswerArr = [
   {question: '¡Hola!', answer: 'hello'},
   {question: 'buenos días', answer: 'good morning'},
@@ -90,6 +90,18 @@ let questionAnswerArr = [
   {question: 'Me llamo', answer: 'my name'},
   {question: 'Gracias', answer: 'thank you'},
   {question: 'De nada', answer: 'you are welcome'},
+  {question: 'Como siempre', answer: 'as always'},
+  {question: '¿Cómo estás?', answer: 'how are you?'},
+  {question: 'Lo siento', answer: 'im sorry'},
+  {question: 'Te amo', answer: 'i love you'},
+  {question: 'Necesito ayuda', answer: 'i need help'},
+  {question: 'adiós', answer: 'goodbye'},
+  {question: 'Feliz Navidad', answer: 'merry christmas'},
+  {question: 'Perdón', answer: 'excuse me'},
+  {question: 'muy bien', answer: 'very well'},
+  {question: 'Feliz cumpleaños', answer: 'happy birthday'},
+  {question: 'No sé', answer: 'i dont know'},
+  {question: 'Buen trabajo', answer: 'good job'},
 ];
 let arrIndex = Math.floor(Math.random() * questionAnswerArr.length);
 io.sockets.on('connection', (client) => {
@@ -98,25 +110,22 @@ io.sockets.on('connection', (client) => {
   client.on('logMe', (input) => {
     let outputObject;
     console.log('logMe logged');
-    if (input.input === questionAnswerArr[arrIndex].answer && waitForAnswer) {
-      if (score[input.userName]) {
-        score[input.userName]++;
-      } else {
-        score[input.userName] = 1;
-      }
+    if (input.input.toLowerCase() === questionAnswerArr[arrIndex].answer && waitForAnswer) { //correct answer
       console.log('emmiting answer');
       waitForAnswer = false;
-      outputObject = {type: 'answer', userName: input.username, value: input.input, score : score[input.userName]};
+      scoreObj[input.userName] = (scoreObj[input.userName] || 0) + 1;
+      const score = scoreObj[input.userName]
+      outputObject = {type: 'answer', userName: input.username, value: input.input, score};
       clearInterval(interval);
-      setTimeout(emitQuestion, 2000);
+      setTimeout(emitQuestion, (Math.random() * 1000) + 1000);
       interval = setInterval(emitQuestion, 35000);
-    } else {
+    } else { //incorrect, or we didn't ask a question so... redundant
       outputObject = {type: 'message', userName: input.username, value:input.input};
     }
     io.sockets.emit('I-logged', outputObject);
   });
 });
-
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 function runServer(port = PORT) {
   server
     .listen(port, () => {
