@@ -5,5 +5,33 @@ body {
 }
 
 .messages {
+<<<<<<< HEAD
   max-height: 45vh;
+=======
+  max-height: 300px;
+}
+
+@media(min-width: 576px) {
+  .messages {
+    max-height: 450px;
+  }
+}
+
+@media(min-width: 768px) {
+  .messages {
+    max-height: 450px;
+  }
+}
+
+@media(min-width: 992px) {
+  .messages {
+    max-height: 600px;
+  }
+}
+
+@media(min-width: 1200px) {
+  .messages {
+    max-height: 600px;
+  }
+>>>>>>> 23a00c512bcdb6161b4661f68f83ea733f377827
 }

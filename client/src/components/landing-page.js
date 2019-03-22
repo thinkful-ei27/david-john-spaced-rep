@@ -11,8 +11,8 @@ export function LandingPage(props) {
 
   return (
     <section className="home mt-32 container mx-auto">
-      <div className="flex flex-row justify-between">
-        <div className="flex flex-col justify-center align-center">
+      <div className="flex flex-col md:flex-row justify-between">
+        <div className="flex flex-col justify-center align-center items-center md:items-start">
           <h1 className="font-semibold text-grey-darkest text-4xl sm:text-5xl md:text-6xl mb-4 leading-none">
             Learn Spanish
           </h1>
@@ -28,7 +28,7 @@ export function LandingPage(props) {
             </button>
           </Link>
         </div>
-        <Logo />
+        <Logo className="hidden sm:block" />
       </div>
     </section>
   );
