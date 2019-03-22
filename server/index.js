@@ -64,6 +64,7 @@ app.use((err, req, res, next) => {
     res.status(500).json({ message: 'Internal Server Error' });
   }
 });
+
 /////////////////////////////////////Chat server///////////////////////////////////////////////////////////////////////////////
 let waitForAnswer = false;
 const server = require('http').createServer(app);
@@ -81,7 +82,21 @@ function emitQuestion() {
 }
 let interval = setInterval(emitQuestion, 20000);
 
-let scoreObj = {};
+let scoreObjArr = [];
+function addScore(name) {
+  console.log("addscore called!")
+  for (let i = 0; i < scoreObjArr.length; i++) {
+    console.log("found the username")
+    if (scoreObjArr[i].username == name) {
+      scoreObjArr[i].score = scoreObjArr[i].score + 1
+      console.log(scoreObjArr[i].score)
+      return scoreObjArr[i].score
+    }
+  }
+  console.log("didn't find a username, so pushing one on")
+  scoreObjArr.push({ score : 1, username: name });
+  return 1
+}
 let questionAnswerArr = [
   {question: '¡Hola!', answer: 'hello'},
   {question: 'buenos días', answer: 'good morning'},
@@ -113,8 +128,7 @@ io.sockets.on('connection', (client) => {
     if (input.input.toLowerCase() === questionAnswerArr[arrIndex].answer && waitForAnswer) { //correct answer
       console.log('emmiting answer');
       waitForAnswer = false;
-      scoreObj[input.userName] = (scoreObj[input.userName] || 0) + 1;
-      const score = scoreObj[input.userName]
+      const score = addScore(input.username)
       outputObject = {type: 'answer', userName: input.username, value: input.input, score};
       clearInterval(interval);
       setTimeout(emitQuestion, (Math.random() * 1000) + 1000);
