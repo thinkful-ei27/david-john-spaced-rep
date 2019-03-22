@@ -14,7 +14,7 @@ import {
 
 const initialState = {
   word: null,
-  answer: null,
+  answer: "",
   error: null,
   feedback: null,
   loading: null,

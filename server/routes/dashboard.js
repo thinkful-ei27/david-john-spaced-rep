@@ -58,7 +58,7 @@ router.post('/feedback', async (req, res, next) => {
       const getList = await User.findOne({_id: userId}).exec();
       const transform = await transformList(getList.list[0], newHist);
       const newList = await User.findOneAndUpdate({_id: userId}, {list: transform})
-      if (answer === null) {
+      if (answer === "") {
         res.json({
           response: `No worries! We will come back to that one.`,
           yourAnswer: `${answer}`,

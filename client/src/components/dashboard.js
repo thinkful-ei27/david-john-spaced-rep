@@ -69,6 +69,7 @@ export class Dashboard extends React.Component {
               placeholder="Type english answer here"
               callback={val => this.handleUpdateAnswer(val)}
               className="mt-8 shadow appearance-none border rounded w-full max-w-sm py-2 px-3 text-grey-darker leading-tight focus:outline-none focus:shadow-outline"
+              value={this.props.answer}
             />
             <div className="flex flex-row justify-around mt-4">
               <button

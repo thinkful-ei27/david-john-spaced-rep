@@ -6,7 +6,8 @@ export default function AnswerInput({
   disabled = false,
   readOnly = false,
   placeholder = "",
-  className
+  className,
+  value
 }) {
   return (
     <input
@@ -16,6 +17,7 @@ export default function AnswerInput({
       placeholder={placeholder}
       onChange={({ target: { value } }) => callback(value)}
       className={className}
+      value = {value}
     />
   );
 }
