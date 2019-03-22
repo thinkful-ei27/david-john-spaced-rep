@@ -4,7 +4,7 @@ import PieChart from "react-minimal-pie-chart";
 export default function ProgressCard(props) {
   const { data, label } = props;
   return (
-    <div className="w-32 h-32">
+    <div className="w-1/4 h-full p-16">
       <p className="font-bold text-center my-4">{label}</p>
       <PieChart
         data={data}

@@ -48,8 +48,8 @@ export function Account(props) {
         </div>
       </main>
       <main className="container mx-auto">
-        <p className="text-2xl font-bold mt-16 text-center">Progress:</p>
-        <div className="flex justify-between">{allCards}</div>
+        <p className="text-2xl font-bold mt-16 text-center">Progress (in %):</p>
+        <div className="flex flex-wrap">{allCards}</div>
       </main>
     </section>
   );
