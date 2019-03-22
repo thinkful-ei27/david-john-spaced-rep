@@ -19,7 +19,8 @@ export class Dashboard extends React.Component {
   }
 
   newWord() {
-    this.props.dispatch(getNewWord());
+    // this.props.dispatch(getNewWord());
+    this.props.dispatch(submitAnswer(this.props.answer, this.props.word));
     // socketLogger();
   }
 
@@ -27,7 +28,8 @@ export class Dashboard extends React.Component {
     this.props.dispatch(setAnswer(val));
   }
 
-  handleUserSubmitAnswer() {
+  handleUserSubmitAnswer(e) {
+    e.preventDefault();
     this.props.dispatch(submitAnswer(this.props.answer, this.props.word));
   }
 
@@ -49,40 +51,44 @@ export class Dashboard extends React.Component {
       }
     }
     return (
-      <div className="dashboard container mx-auto mt-32">
-        <div className="answer-box bg-white rounded flex flex-col justify-center items-center">
+      <section className="container mx-auto mt-32">
+        <div className="mx-auto text-center text-grey-darkest">
           <p className="text-lg">Welcome back, {this.props.name}!</p>
           <p className="mt-2">Shall we continue learning?</p>
           <p className="text-xl mt-8">Type the right answer</p>
           <p className="text-5xl mt-8">{this.props.word}</p>
           {display}
-          <AnswerInput
-            type="text"
-            placeholder="Type english answer here"
-            callback={val => this.handleUpdateAnswer(val)}
-            className="mt-8 max-w-sm shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker leading-tight focus:outline-none focus:shadow-outline"
-          />
-        </div>
-        <div className="flex flex-row justify-around mt-4">
-          <button
-            type="button"
-            className="text-grey-darkest font-bold py-2 px-4 rounded"
-            onClick={() => this.newWord()}
-          >
-            Skip
-          </button>
-          <button
-            type="button"
-            className="bg-orange hover:bg-orange-dark text-white font-bold py-2 px-4 rounded"
-            onClick={() => {
-              this.handleUserSubmitAnswer();
+          <form
+            className="submit-word"
+            onSubmit={e => {
+              this.handleUserSubmitAnswer(e);
             }}
           >
-            Submit
-          </button>
+            <AnswerInput
+              type="text"
+              placeholder="Type english answer here"
+              callback={val => this.handleUpdateAnswer(val)}
+              className="mt-8 shadow appearance-none border rounded w-full max-w-sm py-2 px-3 text-grey-darker leading-tight focus:outline-none focus:shadow-outline"
+            />
+            <div className="flex flex-row justify-around mt-4">
+              <button
+                type="button"
+                className="text-grey-darkest font-bold py-2 px-4 rounded"
+                onClick={() => this.newWord()}
+              >
+                Skip
+              </button>
+              <button
+                type="submit"
+                className="bg-orange hover:bg-orange-dark text-white font-bold py-2 px-4 rounded"
+              >
+                Submit
+              </button>
+            </div>
+          </form>
         </div>
         <p className="text-center mt-8 text-xl">{this.props.feedback}</p>
-      </div>
+      </section>
     );
   }
 }

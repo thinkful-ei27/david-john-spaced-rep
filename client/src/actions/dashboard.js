@@ -145,6 +145,9 @@ export const submitAnswer = (val, word) => dispatch => {
     .then(() => {
       return dispatch(getNewWord());
     })
+    .then(() => {
+      return dispatch(setAnswer(""));
+    })
     .catch(err => {
       const message = "this is an error message";
       return dispatch(submitAnswerError(message));
