@@ -38,6 +38,8 @@ export class ChatBox extends React.Component {
       input: this.props.inputWord,
       username: this.props.username
     });
+    // Reset input box to nothing
+    this.props.dispatch(updateInput(""));
   }
 
   render() {
